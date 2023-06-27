@@ -1,5 +1,5 @@
 ---
-name: 'Feat: [내용]'
+name: Feat
 about: Suggest an idea for this project
 title: ''
 labels: ''

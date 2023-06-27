@@ -1,5 +1,5 @@
 ---
-name: 'Bug: [내용]'
+name: Bug
 about: Create a report to help us improve
 title: ''
 labels: ''
