@@ -6,32 +6,42 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 15:01:15 by yena              #+#    #+#             */
-/*   Updated: 2023/07/03 15:01:15 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/03 20:23:40 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-void    oadd(t_object **list, t_object *new)
+/**
+ * @brief object를 list에 추가한다.
+ * @param list
+ * @param new
+ */
+void	oadd(t_object **list, t_object *new)
 {
-    t_object    *cur;
+	t_object	*cur;
 
-    if (*list == NULL)
-    {
-        *list = new;
-        return ;
-    }
-    cur = *list;
-    while (cur->next)
-        cur = cur->next;
-    cur->next = new;
+	if (*list == NULL)
+	{
+		*list = new;
+		return ;
+	}
+	cur = *list;
+	while (cur->next)
+		cur = cur->next;
+	cur->next = new;
 }
 
-t_object    *olast(t_object *list)
+/**
+ * @brief list의 마지막 object를 반환한다.
+ * @param list
+ * @return
+ */
+t_object	*olast(t_object *list)
 {
-    if (list == NULL)
-        return (NULL);
-    while (list->next)
-        list = list->next;
-    return (list);
+	if (list == NULL)
+		return (NULL);
+	while (list->next)
+		list = list->next;
+	return (list);
 }

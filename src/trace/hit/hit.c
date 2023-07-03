@@ -6,38 +6,54 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 15:01:06 by yena              #+#    #+#             */
-/*   Updated: 2023/07/03 15:01:07 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/03 19:42:48 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "trace.h"
 
-t_bool  hit(t_object *world, t_ray *ray, t_hit_record *rec)
+/**
+ * @brief 레이가 오브젝트에 히트하는지 확인
+ * 각 오브젝트에 대해 hit_obj 함수를 호출하여 히트 여부를 확인
+ * @param world
+ * @param ray
+ * @param rec
+ * @return
+ */
+t_bool	hit(t_object *world, t_ray *ray, t_hit_record *rec)
 {
-    t_bool          is_hit;
-    t_hit_record    temp_rec;
+	t_bool			is_hit;
+	t_hit_record	temp_rec;
 
-    temp_rec = *rec; // temp_rec의 tmin, tmax 값 초기화
-    is_hit = FALSE;
-    while (world)
-    {
-        if (hit_obj(world, ray, &temp_rec))
-        {
-            is_hit = TRUE;
-            temp_rec.tmax = temp_rec.t; // 더 멀리 있는 오브젝트에는 히트하지 않게 함
-            *rec = temp_rec;
-        }
-        world = world->next;
-    }
-    return (is_hit);
+	temp_rec = *rec;
+	is_hit = FALSE;
+	while (world)
+	{
+		if (hit_obj(world, ray, &temp_rec))
+		{
+			is_hit = TRUE;
+			temp_rec.tmax = temp_rec.t;
+			*rec = temp_rec;
+		}
+		world = world->next;
+	}
+	return (is_hit);
 }
 
-t_bool  hit_obj(t_object *world, t_ray *ray, t_hit_record *rec)
+/**
+ * @brief 오브젝트에 히트하는지 확인
+ * 오브젝트의 타입에 따라 각 오브젝트에 대한 히트 여부를 확인
+ * @param world
+ * @param ray
+ * @param rec
+ * @return
+ */
+t_bool	hit_obj(t_object *world, t_ray *ray, t_hit_record *rec)
 {
-    t_bool  hit_result;
+	t_bool	hit_result;
 
-    hit_result = FALSE;
-    if (world->type == SP)
-        hit_result = hit_sphere(world->element, ray, rec);
-    return (hit_result);
+	hit_result = FALSE;
+	if (world->type == SP)
+		hit_result = hit_sphere(world->element, ray, rec);
+	return (hit_result);
 }
