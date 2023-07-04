@@ -22,6 +22,7 @@ SRCS =	src/print/print.c \
 OBJS = ${SRCS:.c=.o}
 
 MLX_DIR = minilibx
+MLX_LIB = libmlx.dylib
 
 LIBFT_DIR = libft
 
@@ -36,6 +37,7 @@ all:	${NAME}
 ${NAME}: ${OBJS}
 		@make bonus -C libft
 		@make -C minilibx
+		cp $(MLX_DIR)/$(MLX_LIB) .
 		@${CC} ${CFLAGS} ${LFLAGS} -o ${NAME} ${OBJS}
 
 %.o: %.c
@@ -50,5 +52,6 @@ fclean:	clean
 		${RM} ${NAME}
 		@make fclean -C libft
 		@make clean -C minilibx
+		${RM} ${MLX_LIB}
 
 re:		fclean all
