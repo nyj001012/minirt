@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 15:10:50 by yena              #+#    #+#             */
-/*   Updated: 2023/07/04 15:40:50 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/04 15:51:48 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@ void	initialize_mlx_info(t_mlx_info *mlx_info)
 			"minirt");
 }
 
+/**
+ * @brief 키보드를 누르면 그에 맞는 동작을 수행한다.
+ * @details esc 키를 누르면 창을 닫고 프로그램을 종료한다.
+ * @param keycode
+ * @param mlx_info
+ * @return int 0
+ */
 int	key_hook(int keycode, t_mlx_info *mlx_info)
 {
 	if (keycode == ESC)
@@ -35,4 +42,15 @@ int	key_hook(int keycode, t_mlx_info *mlx_info)
 		exit(0);
 	}
 	return (0);
+}
+
+/**
+ * @brief 창의 x 버튼을 누르면 창을 닫고 프로그램을 종료한다.
+ * @param mlx_info
+ * @return int 0
+ */
+int	destroy_window(t_mlx_info *mlx_info)
+{
+	mlx_destroy_window(mlx_info->mlx, mlx_info->mlx_window);
+	exit(0);
 }

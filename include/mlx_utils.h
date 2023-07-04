@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 15:15:40 by yena              #+#    #+#             */
-/*   Updated: 2023/07/04 15:36:37 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/04 15:50:26 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,5 @@
 
 void	initialize_mlx_info(t_mlx_info *mlx_info);
 int		key_hook(int keycode, t_mlx_info *mlx_info);
-
+int		destroy_window(t_mlx_info *mlx_info);
 #endif
