@@ -6,14 +6,17 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 14:30:37 by yena              #+#    #+#             */
-/*   Updated: 2023/07/04 14:33:47 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/04 14:46:37 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx.h"
+#include "structures.h"
 
 int	main(void)
 {
-
+	void	*mlx;
+	mlx = mlx_init();
+	mlx_new_window(mlx, 1280, 720, "minirt");
 	return (0);
 }

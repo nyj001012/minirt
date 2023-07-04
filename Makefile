@@ -21,24 +21,34 @@ SRCS =	src/print/print.c \
 		src/main.c
 OBJS = ${SRCS:.c=.o}
 
+MLX_DIR = minilibx
+
+LIBFT_DIR = libft
+
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
-LFLAGS = -L libft -L minilibx -framework OpenGL -framework AppKit
-INC = -I include -I libft -I minilibx
+LFLAGS = -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
+INC = -I include -I ${LIBFT_DIR} -I ${MLX_DIR}
 RM = rm -f
 
 all:	${NAME}
 
 ${NAME}: ${OBJS}
-		${CC} ${CFLAGS} ${LFLAGS} -o ${NAME} ${OBJS}
+		@make bonus -C libft
+		@make -C minilibx
+		@${CC} ${CFLAGS} ${LFLAGS} -o ${NAME} ${OBJS}
 
 %.o: %.c
-		${CC} ${CFLAGS} ${INC} -c $< -o ${<:.c=.o}
+		@${CC} ${CFLAGS} ${INC} -c $< -o ${<:.c=.o}
 
 clean:
 		${RM} ${OBJS}
+		@make clean -C libft
+		@make clean -C minilibx
 
 fclean:	clean
 		${RM} ${NAME}
+		@make fclean -C libft
+		@make clean -C minilibx
 
 re:		fclean all
