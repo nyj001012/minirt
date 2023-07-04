@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 11:23:18 by yena              #+#    #+#             */
-/*   Updated: 2023/07/04 15:18:28 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/04 15:35:12 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # define TRUE 1
 # define FALSE 0
-# define ESC 65307
 # define SP 0
 # define LIGHT_POINT 1
 # define EPSILON 1e-6

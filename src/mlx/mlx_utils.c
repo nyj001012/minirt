@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 15:10:50 by yena              #+#    #+#             */
-/*   Updated: 2023/07/04 15:19:41 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/04 15:40:50 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,14 @@ void	initialize_mlx_info(t_mlx_info *mlx_info)
 			mlx_info->window_width,
 			mlx_info->window_height,
 			"minirt");
+}
+
+int	key_hook(int keycode, t_mlx_info *mlx_info)
+{
+	if (keycode == ESC)
+	{
+		mlx_destroy_window(mlx_info->mlx, mlx_info->mlx_window);
+		exit(0);
+	}
+	return (0);
 }
