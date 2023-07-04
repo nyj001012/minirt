@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 15:01:17 by yena              #+#    #+#             */
-/*   Updated: 2023/07/04 13:37:17 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/04 13:38:14 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,20 +57,6 @@ t_vec3	vmult_(t_vec3 vec, t_vec3 vec2)
 	vec.x *= vec2.x;
 	vec.y *= vec2.y;
 	vec.z *= vec2.z;
-	return (vec);
-}
-
-/**
- * @brief t_vec3와 double 값의 나눗셈을 구한다.
- * @param vec
- * @param t
- * @return t_vec3 벡터 / 스칼라
- */
-t_vec3	vdivide(t_vec3 vec, double t)
-{
-	vec.x *= 1 / t;
-	vec.y *= 1 / t;
-	vec.z *= 1 / t;
 	return (vec);
 }
 

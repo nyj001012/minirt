@@ -74,7 +74,7 @@ t_bool	hit_sphere(t_object *sp_obj, t_ray *ray, t_hit_record *rec)
 		return (FALSE);
 	rec->t = root;
 	rec->p = ray_at(ray, root);
-	rec->normal = vdivide(vminus(rec->p, sp->center), sp->radius);
+	rec->normal = vdivide_(vminus(rec->p, sp->center), sp->radius);
 	set_face_normal(ray, rec);
 	rec->albedo = sp_obj->albedo;
 	return (TRUE);
