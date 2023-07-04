@@ -4,6 +4,7 @@ SRCS =	src/mlx/mlx_utils.c \
 		src/print/print.c \
 		src/scene/canvas.c \
 		src/scene/object_create.c \
+		src/scene/render_scene.c \
 		src/scene/scene.c \
 		src/trace/hit/hit_sphere.c \
 		src/trace/hit/hit.c \
@@ -11,6 +12,7 @@ SRCS =	src/mlx/mlx_utils.c \
 		src/trace/ray/phong_lighting.c \
 		src/trace/ray/ray.c \
 		src/trace/ray/reflect.c \
+		src/utils/color/color3_utils.c \
 		src/utils/object/object_utils.c \
 		src/utils/vec3/vec3_utils.c \
 		src/utils/vec3/vec3_constructor.c \

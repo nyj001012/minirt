@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 15:00:57 by yena              #+#    #+#             */
-/*   Updated: 2023/07/04 16:25:21 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/04 16:52:58 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 /**
  * @brief scene을 초기화한다.
  * 추후 scene에 object와 light를 매개 변수로 받아와 추가할 수 있도록 한다.
+ * @param mlx_info
  * @return t_scene* 초기화된 scene
  */
-t_scene *scene_init(void)
+t_scene *scene_init(t_mlx_info mlx_info)
 {
 	t_scene     *scene;
 	t_object    *world;
@@ -26,7 +27,7 @@ t_scene *scene_init(void)
 
 	if(!(scene = (t_scene *)malloc(sizeof(t_scene))))
 		return (NULL);
-	scene->canvas = canvas(400, 300);
+	scene->canvas = canvas(mlx_info.window_width, mlx_info.window_height);
 	scene->camera = camera(&scene->canvas, point3(0, 0, 0));
 	world = object(SP, sphere(point3(-2, 0, -5), 2), color3(0.5, 0, 0));
 	oadd(&world, object(SP, sphere(point3(0, -1000, -0), 995), color3(1, 1, 1)));

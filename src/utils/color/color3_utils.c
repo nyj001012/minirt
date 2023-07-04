@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.c                                            :+:      :+:    :+:   */
+/*   color3_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/03 15:00:47 by yena              #+#    #+#             */
-/*   Updated: 2023/07/04 16:37:01 by yena             ###   ########.fr       */
+/*   Created: 2023/07/04 16:40:12 by yena              #+#    #+#             */
+/*   Updated: 2023/07/04 16:43:16 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/print.h"
+#include "utils.h"
 
 /**
- * @brief 색상값 출력
- * [0,1] 로  되어있는 RGB 값을 각각 [0,255]에 맵핑해서 출력
- * @param pixel_color 
+ * @brief t_color3 값을 0xTTRRGGBB 형태의 int 값으로 변환한다.
+ * @param color
+ * @return int 0xTTRRGGBB
  */
-void	write_color(t_color3 pixel_color)
+int	t_color3_to_int(t_color3 color)
 {
-	printf("%d %d %d\n", (int)(255.999 * pixel_color.x),
-		(int)(255.999 * pixel_color.y),
-		(int)(255.999 * pixel_color.z));
+	int	r;
+	int	g;
+	int	b;
+
+	r = (int)(255.999 * color.x);
+	g = (int)(255.999 * color.y);
+	b = (int)(255.999 * color.z);
+	return (r << 16 | g << 8 | b);
 }

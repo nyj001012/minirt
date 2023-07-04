@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 11:23:18 by yena              #+#    #+#             */
-/*   Updated: 2023/07/01 13:32:35 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/04 16:51:12 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "scene.h"
 #include "trace.h"
 
-t_scene *scene_init(void)
+t_scene *scene_init(mlx_info)
 {
 	t_scene     *scene;
 	t_object    *world;
@@ -24,7 +24,7 @@ t_scene *scene_init(void)
 	// malloc 할당 실패 시, 실습에서는 return NULL로 해두었지만, 적절한 에러 처리가 필요하다.
 	if(!(scene = (t_scene *)malloc(sizeof(t_scene))))
 		return (NULL);
-	scene->canvas = canvas(400, 300);
+	scene->canvas = canvas(mlx_info->mlx_, 300);
 	scene->camera = camera(&scene->canvas, point3(0, 0, 0));
 	world = object(SP, sphere(point3(-2, 0, -5), 2), color3(0.5, 0, 0)); // world 에 구1 추가
 	oadd(&world, object(SP, sphere(point3(0, -1000, -0), 995), color3(1, 1, 1))); // world 에 구2 추가
