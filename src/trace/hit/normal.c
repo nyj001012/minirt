@@ -26,5 +26,5 @@ void	set_face_normal(t_ray *r, t_hit_record *rec)
 	if (rec->front_face)
 		rec->normal = rec->normal;
 	else
-		rec->normal = vmult(rec->normal, -1);
+		rec->normal = vmult_(rec->normal, -1);
 }

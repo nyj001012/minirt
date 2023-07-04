@@ -37,7 +37,7 @@ t_point3	ray_at(t_ray *ray, double t)
 {
 	t_point3	at;
 
-	at = vplus(ray->origin, vmult(ray->direction, t));
+	at = vplus(ray->origin, vmult_(ray->direction, t));
 	return (at);
 }
 
@@ -59,9 +59,9 @@ t_ray	ray_primary(t_camera *cam, double u, double v)
 			vminus(
 				vplus(
 					vplus(
-						cam->left_bottom, vmult(cam->horizontal, u)
+						cam->left_bottom, vmult_(cam->horizontal, u)
 						),
-					vmult(cam->vertical, v)
+					vmult_(cam->vertical, v)
 					), cam->origin
 				)
 			);
@@ -97,8 +97,8 @@ t_color3	ray_color(t_scene *scene)
 	{
 		t = 0.5 * (scene->ray.direction.y + 1.0);
 		return (vplus(
-				vmult(color3(1, 1, 1), 1.0 - t),
-				vmult(color3(0.5, 0.7, 1.0), t)
+				vmult_(color3(1, 1, 1), 1.0 - t),
+				vmult_(color3(0.5, 0.7, 1.0), t)
 			));
 	}
 }

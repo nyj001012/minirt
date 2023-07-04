@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 11:23:18 by yena              #+#    #+#             */
-/*   Updated: 2023/07/03 20:01:21 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/04 14:14:52 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,36 @@
 #include "utils.h"
 
 /**
- * @brief 근의 공식을 이용해 t를 구하는 함수, 즉 빛과 물체가 교차하는지 확인한다.
- * 짝수 근의 공식 판별식: b^2 - ac
- * 작은 근이 tmin보다 작거나 큰 근이 tmax보다 크면 교차하지 않음
+ * @brief 실근을 구하는 함수. 두 실근 중 tmin과 tmax 사이에 있는 실근을 구한다.
+ * @param half_b
+ * @param sqrt_d
+ * @param a
+ * @param rec
+ * @return double 실근
+ */
+double	get_root(double half_b, double sqrt_d, double a, t_hit_record *rec)
+{
+	double	root;
+
+	root = (-half_b - sqrt_d) / a;
+	if (root < rec->tmin || rec->tmax < root)
+		root = (-half_b + sqrt_d) / a;
+	return (root);
+}
+
+/**
+ * @brief 구의 방정식과 광선의 방정식을 이용해 판별식과 실근을 구하는 함수
+ * 판별식이 0보다 작으면 실근이 없다.
+ * @see https://en.wikipedia.org/wiki/Quadratic_formula
+ * @see https://github.com/GaepoMorningEagles/mini_raytracing_in_c
  * @param ray
  * @param sp
  * @param discriminant
  * @param root
- * @return t_bool 교차 여부
+ * @return double 실근
  */
-t_bool	is_valid_hit(t_ray *ray, t_sphere *sp, double *discriminant,
-					double *root)
+double	get_discriminant_and_root(t_ray *ray, t_sphere *sp,
+					double *discriminant, t_hit_record *rec)
 {
 	t_vec3		oc;
 	double		a;
@@ -39,16 +58,9 @@ t_bool	is_valid_hit(t_ray *ray, t_sphere *sp, double *discriminant,
 	c = vlength2(oc) - sp->radius_square;
 	*discriminant = half_b * half_b - a * c;
 	if (*discriminant < 0)
-		return (FALSE);
+		return (0);
 	sqrt_d = sqrt(*discriminant);
-	root = (-half_b - sqrt_d) / a;
-	if (root < rec->tmin || rec->tmax < root)
-	{
-		root = (-half_b + sqrt_d) / a;
-		if (root < rec->tmin || rec->tmax < root)
-			return (FALSE);
-	}
-	return (TRUE);
+	return (get_root(half_b, sqrt_d, a, rec));
 }
 
 /**
@@ -66,15 +78,17 @@ t_bool	hit_sphere(t_object *sp_obj, t_ray *ray, t_hit_record *rec)
 {
 	t_sphere	*sp;
 	double		discriminant;
-	double		sqrt_d;
 	double		root;
 
 	sp = sp_obj->element;
-	if (!is_valid_hit(ray, sp, &discriminant, &sqrt_d))
+	root = get_discriminant_and_root(ray, sp, &discriminant, rec);
+	if (discriminant < 0)
+		return (FALSE);
+	if (root < rec->tmin || rec->tmax < root)
 		return (FALSE);
 	rec->t = root;
 	rec->p = ray_at(ray, root);
-	rec->normal = vdivide(vminus(rec->p, sp->center), sp->radius);
+	rec->normal = vdivide_(vminus(rec->p, sp->center), sp->radius);
 	set_face_normal(ray, rec);
 	rec->albedo = sp_obj->albedo;
 	return (TRUE);

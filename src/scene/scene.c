@@ -37,8 +37,8 @@ t_camera	camera(t_canvas *canvas, t_point3 origin)
 	cam.left_bottom = vminus(
 			vminus(
 				vminus(
-					cam.origin, vdivide(cam.horizontal, 2)
-					), vdivide(cam.vertical, 2)
+					cam.origin, vdivide_(cam.horizontal, 2)
+					), vdivide_(cam.vertical, 2)
 				), vec3(0, 0, cam.focal_len)
 			);
 	return (cam);
