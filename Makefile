@@ -22,6 +22,7 @@ SRCS =	src/mlx/mlx_utils.c \
 		src/utils/vec3/vec3_plus.c \
 		src/utils/vec3/vec3_length.c \
 		src/parsing/process_file.c\
+		src/parsing/split_line.c\
 		src/main.c
 OBJS = ${SRCS:.c=.o}
 

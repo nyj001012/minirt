@@ -6,7 +6,7 @@
 /*   By: jihyeole <jihyeole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 11:23:18 by yena              #+#    #+#             */
-/*   Updated: 2023/07/05 03:02:38 by jihyeole         ###   ########.fr       */
+/*   Updated: 2023/07/05 03:26:20 by jihyeole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # define SP 0
 # define LIGHT_POINT 1
 # define PL 2
-# define CYL 3
+# define CY 3
 # define EPSILON 1e-6
 # define LUMEN 3
 
