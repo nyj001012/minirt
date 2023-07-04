@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 11:23:18 by yena              #+#    #+#             */
-/*   Updated: 2023/07/03 20:32:12 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/04 14:15:23 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,14 @@ t_bool		is_valid_hit(t_ray *ray, t_sphere *sp, double *discriminant,
 				double *root);
 t_bool		hit(t_object *obj, t_ray *ray, t_hit_record *rec);
 t_bool		hit_obj(t_object *obj, t_ray *ray, t_hit_record *rec);
+double		get_root(double half_b, double sqrt_d, double a, t_hit_record *rec);
+double		get_discriminant_and_root(t_ray *ray, t_sphere *sp, double *discriminant,
+									  t_hit_record *rec);
 t_bool		hit_sphere(t_object *sp_obj, t_ray *ray, t_hit_record *rec);
 void		set_face_normal(t_ray *r, t_hit_record *rec);
 t_color3	get_diffuse(t_scene *scene, t_light *light);
 t_color3	get_specular(t_scene *scene, t_light *light);
+t_vec3		reflect(t_vec3 v, t_vec3 n);
 t_color3	point_light_get(t_scene *scene, t_light *ligth);
 t_color3	phong_lighting(t_scene *scene);
 t_bool		in_shadow(t_object *objs, t_ray light_ray, double light_len);

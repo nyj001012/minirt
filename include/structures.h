@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 11:23:18 by yena              #+#    #+#             */
-/*   Updated: 2023/07/03 15:08:56 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/04 14:05:59 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ typedef struct s_sphere		t_sphere;
 typedef struct s_hit_record	t_hit_record;
 typedef struct s_object		t_object;
 typedef struct s_light		t_light;
-typedef struct s_hit_record	t_hit_record;
 typedef struct s_scene		t_scene;
 typedef int					t_object_type;
 typedef int					t_bool;

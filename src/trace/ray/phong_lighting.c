@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 12:49:20 by yena              #+#    #+#             */
-/*   Updated: 2023/07/04 13:31:15 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/04 14:16:23 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ t_color3	get_specular(t_scene *scene, t_light *light)
 	double		spec;
 	t_color3	specular;
 
+	light_dir = vunit(vminus(light->origin, scene->rec.p));
 	view_dir = vunit(vmult_(scene->ray.direction, -1));
 	reflect_dir = reflect(vmult_(light_dir, -1), scene->rec.normal);
 	spec = pow(fmax(vdot(view_dir, reflect_dir), 0.0), KSN);
@@ -89,8 +90,6 @@ t_color3	point_light_get(t_scene *scene, t_light *light)
 {
 	t_color3	diffuse;
 	t_color3	specular;
-	t_vec3		view_dir;
-	t_vec3		reflect_dir;
 	double		brightness;
 
 	diffuse = get_diffuse(scene, light);

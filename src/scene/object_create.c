@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 11:23:18 by yena              #+#    #+#             */
-/*   Updated: 2023/07/03 15:17:18 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/04 13:47:42 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_light	*light_point(t_point3 light_origin, t_color3 light_color,
 {
 	t_light	*light;
 
-	light = (t_light *)malloc(sizdof(t_light));
+	light = (t_light *)malloc(sizeof(t_light));
 	if (!light)
 		return (NULL);
 	light->origin = light_origin;
