@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   mlx.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/04 14:30:37 by yena              #+#    #+#             */
-/*   Updated: 2023/07/04 15:16:48 by yena             ###   ########.fr       */
+/*   Created: 2023/07/04 15:15:40 by yena              #+#    #+#             */
+/*   Updated: 2023/07/04 15:19:04 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx_utils.h"
+#ifndef MLX_UTILS_H
+# define MLX_UTILS_H
 
-int	main(void)
-{
-	t_mlx_info	mlx_info;
+# include "mlx.h"
+# include "structures.h"
 
-	initialize_mlx_info(&mlx_info);
-	mlx_loop(mlx_info.mlx);
-	return (0);
-}
+void	initialize_mlx_info(t_mlx_info *mlx_info);
+
+#endif

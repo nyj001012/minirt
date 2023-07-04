@@ -1,6 +1,7 @@
-NAME = 	sphere
+NAME =	minirt
 
-SRCS =	src/print/print.c \
+SRCS =	src/mlx/mlx_utils.c \
+		src/print/print.c \
 		src/scene/canvas.c \
 		src/scene/object_create.c \
 		src/scene/scene.c \
@@ -37,7 +38,7 @@ all:	${NAME}
 ${NAME}: ${OBJS}
 		@make bonus -C libft
 		@make -C minilibx
-		cp $(MLX_DIR)/$(MLX_LIB) .
+		@cp $(MLX_DIR)/$(MLX_LIB) .
 		@${CC} ${CFLAGS} ${LFLAGS} -o ${NAME} ${OBJS}
 
 %.o: %.c
