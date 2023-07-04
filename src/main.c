@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 14:30:37 by yena              #+#    #+#             */
-/*   Updated: 2023/07/04 14:46:37 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/04 15:02:13 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,11 @@
 int	main(void)
 {
 	void	*mlx;
+	void	*mlx_window;
+
 	mlx = mlx_init();
-	mlx_new_window(mlx, 1280, 720, "minirt");
+	mlx_window = mlx_new_window(mlx, 1280, 720, "minirt");
+	(void)mlx_window;
+	mlx_loop(mlx);
 	return (0);
 }
