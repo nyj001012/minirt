@@ -47,13 +47,13 @@ t_color3	get_diffuse(t_scene *scene, t_light *light)
 
 	light_dir = vminus(light->origin, scene->rec.p);
 	light_len = vlength(light_dir);
-	light_ray = ray(vplus(scene->rec.p, vmult(scene->rec.normal, EPSILON)),
+	light_ray = ray(vplus(scene->rec.p, vmult_(scene->rec.normal, EPSILON)),
 			light_dir);
 	if (in_shadow(scene->world, light_ray, light_len))
 		return (color3(0, 0, 0));
 	light_dir = vunit(light_dir);
 	kd = fmax(vdot(scene->rec.normal, light_dir), 0.0);
-	diffuse = vmult(light->light_color, kd);
+	diffuse = vmult_(light->light_color, kd);
 	return (diffuse);
 }
 
@@ -72,10 +72,10 @@ t_color3	get_specular(t_scene *scene, t_light *light)
 	double		spec;
 	t_color3	specular;
 
-	view_dir = vunit(vmult(scene->ray.direction, -1));
-	reflect_dir = reflect(vmult(light_dir, -1), scene->rec.normal);
+	view_dir = vunit(vmult_(scene->ray.direction, -1));
+	reflect_dir = reflect(vmult_(light_dir, -1), scene->rec.normal);
 	spec = pow(fmax(vdot(view_dir, reflect_dir), 0.0), KSN);
-	specular = vmult(vmult(light->light_color, KS), spec);
+	specular = vmult_(vmult_(light->light_color, KS), spec);
 	return (specular);
 }
 
@@ -96,7 +96,7 @@ t_color3	point_light_get(t_scene *scene, t_light *light)
 	diffuse = get_diffuse(scene, light);
 	specular = get_specular(scene, light);
 	brightness = light->bright_ratio * LUMEN;
-	return (vmult(vplus(vplus(diffuse, specular), specular), brightness));
+	return (vmult_(vplus(vplus(diffuse, specular), specular), brightness));
 }
 
 /**
@@ -120,5 +120,5 @@ t_color3	phong_lighting(t_scene *scene)
 		lights = lights->next;
 	}
 	light_color = vplus(light_color, scene->ambient);
-	return (vmin(vmult_(light_color, scene->rec.albedo), color3(1, 1, 1)));
+	return (vmin(vmult(light_color, scene->rec.albedo), color3(1, 1, 1)));
 }

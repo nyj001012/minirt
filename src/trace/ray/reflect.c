@@ -20,5 +20,5 @@
  */
 t_vec3	reflect(t_vec3 v, t_vec3 n)
 {
-	return (vminus(v, vmult(n, vdot(v, n) * 2)));
+	return (vminus(v, vmult_(n, vdot(v, n) * 2)));
 }
