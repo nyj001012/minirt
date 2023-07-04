@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 15:00:57 by yena              #+#    #+#             */
-/*   Updated: 2023/07/04 16:52:58 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/04 17:12:38 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,27 @@
  * @param mlx_info
  * @return t_scene* 초기화된 scene
  */
-t_scene *scene_init(t_mlx_info mlx_info)
+t_scene	*scene_init(t_mlx_info mlx_info)
 {
-	t_scene     *scene;
-	t_object    *world;
-	t_object    *lights;
-	double      ka;
+	t_scene		*scene;
+	t_object	*world;
+	t_object	*lights;
+	double		ka;
 
-	if(!(scene = (t_scene *)malloc(sizeof(t_scene))))
+	scene = (t_scene *)malloc(sizeof(t_scene));
+	if (!scene)
 		return (NULL);
 	scene->canvas = canvas(mlx_info.window_width, mlx_info.window_height);
 	scene->camera = camera(&scene->canvas, point3(0, 0, 0));
 	world = object(SP, sphere(point3(-2, 0, -5), 2), color3(0.5, 0, 0));
-	oadd(&world, object(SP, sphere(point3(0, -1000, -0), 995), color3(1, 1, 1)));
-	oadd(&world, object(SP, sphere(point3(2, 0, -5), 2), color3(0, 0.5, 0)));
+	oadd(&world,
+		object(SP, sphere(point3(0, -1000, -0), 995), color3(1, 1, 1)));
+	oadd(&world,
+		object(SP, sphere(point3(2, 0, -5), 2), color3(0, 0.5, 0)));
 	scene->world = world;
-	lights = object(LIGHT_POINT, light_point(point3(0, 20, 0), color3(1, 1, 1), 0.5), color3(0, 0, 0)); // 더미 albedo
+	lights = object(LIGHT_POINT,
+			light_point(point3(0, 20, 0), color3(1, 1, 1), 0.5),
+			color3(0, 0, 0));
 	scene->light = lights;
 	ka = 0.1;
 	scene->ambient = vmult_(color3(1, 1, 1), ka);

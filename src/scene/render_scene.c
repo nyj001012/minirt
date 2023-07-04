@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 16:29:39 by yena              #+#    #+#             */
-/*   Updated: 2023/07/04 17:07:57 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/04 17:10:24 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ void	render_scene(t_mlx_info *mlx_info)
 			scene->ray = get_primary_ray(scene, j, i);
 			pixel_color = ray_color(scene);
 			mlx_pixel_put(mlx_info->mlx,
-						  mlx_info->mlx_window,
-						  j,
-						  scene->canvas.height - (i + 1),
-						  t_color3_to_int(pixel_color));
+				mlx_info->mlx_window,
+				j,
+				scene->canvas.height - (i + 1),
+				t_color3_to_int(pixel_color));
 		}
 	}
 }
