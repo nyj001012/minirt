@@ -1,24 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/04 14:30:37 by yena              #+#    #+#             */
-/*   Updated: 2023/07/04 15:49:35 by yena             ###   ########.fr       */
+/*   Created: 2022/07/14 23:17:06 by yena              #+#    #+#             */
+/*   Updated: 2022/07/15 02:40:26 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx_utils.h"
+#include "libft.h"
 
-int	main(void)
+static void	recursive_putnbr_fd(int n, int fd, int sign)
 {
-	t_mlx_info	mlx_info;
+	if (n == 0)
+		return ;
+	recursive_putnbr_fd(n / 10, fd, sign);
+	write(fd, &"0123456789"[(n % 10) * sign], 1);
+}
 
-	initialize_mlx_info(&mlx_info);
-	mlx_key_hook(mlx_info.mlx_window, key_hook, &mlx_info);
-	mlx_hook(mlx_info.mlx_window, 17, 0, destroy_window, &mlx_info);
-	mlx_loop(mlx_info.mlx);
-	return (0);
+void	ft_putnbr_fd(int n, int fd)
+{
+	int	sign;
+
+	sign = 1;
+	if (n < 0)
+	{
+		write(fd, "-", 1);
+		sign = -1;
+	}
+	if (n == 0)
+		write(fd, "0", 1);
+	recursive_putnbr_fd(n, fd, sign);
 }

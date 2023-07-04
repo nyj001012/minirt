@@ -1,24 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/04 14:30:37 by yena              #+#    #+#             */
-/*   Updated: 2023/07/04 15:49:35 by yena             ###   ########.fr       */
+/*   Created: 2022/07/14 22:19:41 by yena              #+#    #+#             */
+/*   Updated: 2022/07/14 23:39:12 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx_utils.h"
+#include "libft.h"
 
-int	main(void)
+char	*ft_strdup(const char *s1)
 {
-	t_mlx_info	mlx_info;
+	size_t	s1_len;
+	size_t	idx;
+	char	*dup;
 
-	initialize_mlx_info(&mlx_info);
-	mlx_key_hook(mlx_info.mlx_window, key_hook, &mlx_info);
-	mlx_hook(mlx_info.mlx_window, 17, 0, destroy_window, &mlx_info);
-	mlx_loop(mlx_info.mlx);
-	return (0);
+	s1_len = ft_strlen(s1);
+	idx = 0;
+	dup = (char *)malloc(sizeof(char) * (s1_len + 1));
+	if (!dup)
+		return (0);
+	while (idx < s1_len)
+	{
+		*(dup + idx) = *(s1 + idx);
+		idx++;
+	}
+	*(dup + idx) = '\0';
+	return (dup);
 }

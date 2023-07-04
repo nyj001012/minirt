@@ -1,24 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/04 14:30:37 by yena              #+#    #+#             */
-/*   Updated: 2023/07/04 15:49:35 by yena             ###   ########.fr       */
+/*   Created: 2022/07/14 22:10:35 by yena              #+#    #+#             */
+/*   Updated: 2022/07/14 23:09:18 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx_utils.h"
-
-int	main(void)
+int	ft_atoi(const char *str)
 {
-	t_mlx_info	mlx_info;
+	int	integer;
+	int	sign;
+	int	i;
 
-	initialize_mlx_info(&mlx_info);
-	mlx_key_hook(mlx_info.mlx_window, key_hook, &mlx_info);
-	mlx_hook(mlx_info.mlx_window, 17, 0, destroy_window, &mlx_info);
-	mlx_loop(mlx_info.mlx);
-	return (0);
+	integer = 0;
+	sign = 1;
+	i = 0;
+	while ((*(str + i) >= 9 && *(str + i) <= 13) || *(str + i) == 32)
+		i++;
+	if (*(str + i) == '-' || *(str + i) == '+')
+	{
+		if (*(str + i) == '-')
+			sign = -1;
+		i++;
+	}
+	while (*(str + i) >= '0' && *(str + i) <= '9')
+	{
+		integer = integer * 10 + (*(str + i) - '0');
+		i++;
+	}
+	return (integer * sign);
 }

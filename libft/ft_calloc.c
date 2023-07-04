@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/04 14:30:37 by yena              #+#    #+#             */
-/*   Updated: 2023/07/04 15:49:35 by yena             ###   ########.fr       */
+/*   Created: 2022/07/14 22:14:17 by yena              #+#    #+#             */
+/*   Updated: 2022/07/20 23:36:51 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx_utils.h"
+#include "libft.h"
 
-int	main(void)
+void	*ft_calloc(size_t count, size_t size)
 {
-	t_mlx_info	mlx_info;
+	void	*ptr;
 
-	initialize_mlx_info(&mlx_info);
-	mlx_key_hook(mlx_info.mlx_window, key_hook, &mlx_info);
-	mlx_hook(mlx_info.mlx_window, 17, 0, destroy_window, &mlx_info);
-	mlx_loop(mlx_info.mlx);
-	return (0);
+	ptr = (void *)malloc(size * count);
+	if (!ptr)
+		return (0);
+	ft_memset(ptr, 0, size * count);
+	return (ptr);
 }

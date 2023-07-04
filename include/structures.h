@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 11:23:18 by yena              #+#    #+#             */
-/*   Updated: 2023/07/04 14:05:59 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/04 15:35:12 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_hit_record	t_hit_record;
 typedef struct s_object		t_object;
 typedef struct s_light		t_light;
 typedef struct s_scene		t_scene;
+typedef struct s_mlx_info	t_mlx_info;
 typedef int					t_object_type;
 typedef int					t_bool;
 
@@ -107,6 +108,14 @@ struct s_scene
 	t_color3		ambient;
 	t_ray			ray;
 	t_hit_record	rec;
+};
+
+struct	s_mlx_info
+{
+	void		*mlx;
+	void		*mlx_window;
+	int			window_width;
+	int			window_height;
 };
 
 #endif

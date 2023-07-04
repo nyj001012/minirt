@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/04 14:30:37 by yena              #+#    #+#             */
-/*   Updated: 2023/07/04 15:49:35 by yena             ###   ########.fr       */
+/*   Created: 2022/07/04 11:04:10 by yena              #+#    #+#             */
+/*   Updated: 2022/07/04 11:07:55 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx_utils.h"
-
-int	main(void)
+int	ft_toupper(int c)
 {
-	t_mlx_info	mlx_info;
-
-	initialize_mlx_info(&mlx_info);
-	mlx_key_hook(mlx_info.mlx_window, key_hook, &mlx_info);
-	mlx_hook(mlx_info.mlx_window, 17, 0, destroy_window, &mlx_info);
-	mlx_loop(mlx_info.mlx);
-	return (0);
+	if (c >= 97 && c <= 122)
+		return (c - 32);
+	return (c);
 }

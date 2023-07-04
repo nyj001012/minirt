@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/04 14:30:37 by yena              #+#    #+#             */
-/*   Updated: 2023/07/04 15:49:35 by yena             ###   ########.fr       */
+/*   Created: 2022/07/14 21:53:09 by yena              #+#    #+#             */
+/*   Updated: 2022/07/14 21:55:18 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx_utils.h"
-
-int	main(void)
+char	*ft_strchr(const char *s, int c)
 {
-	t_mlx_info	mlx_info;
+	int	i;
 
-	initialize_mlx_info(&mlx_info);
-	mlx_key_hook(mlx_info.mlx_window, key_hook, &mlx_info);
-	mlx_hook(mlx_info.mlx_window, 17, 0, destroy_window, &mlx_info);
-	mlx_loop(mlx_info.mlx);
+	i = 0;
+	while (*(s + i))
+	{
+		if (*(s + i) == (char)c)
+			return ((char *)(s + i));
+		else
+			i++;
+	}
+	if (*(s + i) == (char)c)
+		return ((char *)(s + i));
 	return (0);
 }

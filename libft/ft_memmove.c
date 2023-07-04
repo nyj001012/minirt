@@ -1,24 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/04 14:30:37 by yena              #+#    #+#             */
-/*   Updated: 2023/07/04 15:49:35 by yena             ###   ########.fr       */
+/*   Created: 2022/07/06 10:36:57 by yena              #+#    #+#             */
+/*   Updated: 2022/07/14 23:28:03 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx_utils.h"
+#include "libft.h"
 
-int	main(void)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	t_mlx_info	mlx_info;
+	unsigned char	*temp;
+	size_t			i;
 
-	initialize_mlx_info(&mlx_info);
-	mlx_key_hook(mlx_info.mlx_window, key_hook, &mlx_info);
-	mlx_hook(mlx_info.mlx_window, 17, 0, destroy_window, &mlx_info);
-	mlx_loop(mlx_info.mlx);
-	return (0);
+	i = 0;
+	if (!dst && !src)
+		return (0);
+	if (dst > src)
+	{
+		temp = (unsigned char *)src;
+		while (i < len)
+		{
+			*((unsigned char *)dst + len - 1 - i) = *(temp + len - 1 - i);
+			i++;
+		}
+		return (dst);
+	}
+	else
+		return (ft_memcpy(dst, src, len));
 }

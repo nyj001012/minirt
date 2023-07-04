@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/04 14:30:37 by yena              #+#    #+#             */
-/*   Updated: 2023/07/04 15:49:35 by yena             ###   ########.fr       */
+/*   Created: 2022/07/14 21:50:52 by yena              #+#    #+#             */
+/*   Updated: 2022/07/15 02:00:15 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx_utils.h"
+#include "libft.h"
 
-int	main(void)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	t_mlx_info	mlx_info;
+	unsigned char	*uc_s1;
+	unsigned char	*uc_s2;
+	size_t			i;
 
-	initialize_mlx_info(&mlx_info);
-	mlx_key_hook(mlx_info.mlx_window, key_hook, &mlx_info);
-	mlx_hook(mlx_info.mlx_window, 17, 0, destroy_window, &mlx_info);
-	mlx_loop(mlx_info.mlx);
+	uc_s1 = (unsigned char *)s1;
+	uc_s2 = (unsigned char *)s2;
+	i = 0;
+	while (i < n && (*(uc_s1 + i) || *(uc_s2 + i)))
+	{
+		if (*(uc_s1 + i) != *(uc_s2 + i))
+			return ((int)(*(uc_s1 + i) - *(uc_s2 + i)));
+		i++;
+	}
 	return (0);
 }

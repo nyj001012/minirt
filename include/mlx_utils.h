@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   mlx.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/04 14:30:37 by yena              #+#    #+#             */
-/*   Updated: 2023/07/04 15:49:35 by yena             ###   ########.fr       */
+/*   Created: 2023/07/04 15:15:40 by yena              #+#    #+#             */
+/*   Updated: 2023/07/04 15:50:26 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx_utils.h"
+#ifndef MLX_UTILS_H
+# define MLX_UTILS_H
 
-int	main(void)
-{
-	t_mlx_info	mlx_info;
+# include <stdlib.h>
+# include <stdio.h>
+# include "mlx.h"
+# include "structures.h"
 
-	initialize_mlx_info(&mlx_info);
-	mlx_key_hook(mlx_info.mlx_window, key_hook, &mlx_info);
-	mlx_hook(mlx_info.mlx_window, 17, 0, destroy_window, &mlx_info);
-	mlx_loop(mlx_info.mlx);
-	return (0);
-}
+# define ESC 53
+
+void	initialize_mlx_info(t_mlx_info *mlx_info);
+int		key_hook(int keycode, t_mlx_info *mlx_info);
+int		destroy_window(t_mlx_info *mlx_info);
+#endif
