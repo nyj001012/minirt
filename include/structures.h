@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 11:23:18 by yena              #+#    #+#             */
-/*   Updated: 2023/07/04 15:35:12 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/04 16:27:55 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ struct	s_mlx_info
 	void		*mlx_window;
 	int			window_width;
 	int			window_height;
+	t_scene		*scene;
 };
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 11:23:18 by yena              #+#    #+#             */
-/*   Updated: 2023/07/03 15:04:55 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/04 16:53:15 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,14 @@
 # include "structures.h"
 # include "utils.h"
 
+t_scene		*scene_init(t_mlx_info mlx_info);
 t_canvas	canvas(int width, int height);
 t_camera	camera(t_canvas *canvas, t_point3 origin);
 t_object	*object(t_object_type type, void *element, t_color3 albedo);
 t_sphere	*sphere(t_point3 cneter, double radius);
 t_light		*light_point(t_point3 light_origin, t_color3 light_color,
 				double bright_ratio);
+t_ray		get_primary_ray(t_scene *scene, int i, int j);
+void		render_scene(t_mlx_info *mlx_info);
 
 #endif

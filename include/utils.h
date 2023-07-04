@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 15:00:44 by yena              #+#    #+#             */
-/*   Updated: 2023/07/04 13:41:46 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/04 16:43:44 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ t_vec3		vunit(t_vec3 vec);
 t_vec3		vmin(t_vec3 vec1, t_vec3 vec2);
 void		oadd(t_object **list, t_object *new);
 t_object	*olast(t_object *list);
+int			t_color3_to_int(t_color3 color);
 
 #endif
