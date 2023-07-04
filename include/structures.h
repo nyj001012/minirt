@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: jihyeole <jihyeole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 11:23:18 by yena              #+#    #+#             */
-/*   Updated: 2023/07/04 16:27:55 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/05 02:48:36 by jihyeole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # define FALSE 0
 # define SP 0
 # define LIGHT_POINT 1
+# define PL 2
+# define CYL 3
 # define EPSILON 1e-6
 # define LUMEN 3
 
@@ -27,6 +29,8 @@ typedef struct s_ray		t_ray;
 typedef struct s_camera		t_camera;
 typedef struct s_canvas		t_canvas;
 typedef struct s_sphere		t_sphere;
+typedef struct s_plane		t_plane;
+typedef struct s_cylinder	t_cylinder;
 typedef struct s_hit_record	t_hit_record;
 typedef struct s_object		t_object;
 typedef struct s_light		t_light;
@@ -71,6 +75,20 @@ struct s_sphere
 	t_point3	center;
 	double		radius;
 	double		radius_square;
+};
+
+struct s_plane
+{
+	t_point3	point;
+	t_vector3	normal_vector;
+};
+
+struct s_cylinder
+{
+	t_point3	center;
+	t_vector3	axis;
+	double		diameter;
+	double		height;
 };
 
 struct s_hit_record

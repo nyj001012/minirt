@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yena <yena@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jihyeole <jihyeole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 15:30:11 by yena              #+#    #+#             */
-/*   Updated: 2022/07/21 12:12:04 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/04 20:40:55 by jihyeole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,21 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# define BUFFER_SIZE 100
 
 typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
 }					t_list;
+
+typedef struct s_glist
+{
+	int				fd;
+	char			*content;
+	struct s_glist	*prev;
+	struct s_glist	*next;
+}	t_glist;
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -65,5 +74,11 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+void	*del(void *a);
+int		have_newline(const char *buf);
+void	ft_strncpy(char *dest, char *src, size_t n);
+char	*ft_strndup(char *s, size_t n);
+char	*gnl_strjoin(char *temp, char *buf);
+char	*get_next_line(int fd);
 
 #endif
