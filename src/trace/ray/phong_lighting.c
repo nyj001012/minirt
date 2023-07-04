@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 12:49:20 by yena              #+#    #+#             */
-/*   Updated: 2023/07/03 20:17:18 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/04 13:31:15 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,6 @@ t_bool	in_shadow(t_object *objs, t_ray light_ray, double light_len)
 	if (hit(objs, &light_ray, &rec))
 		return (TRUE);
 	return (FALSE);
-}
-
-/**
- * @brief 벡터 v를 법선 벡터 n에 대해 반사 시킨 벡터를 반환 한다.
- * v - 2 * dot(v, n) * n
- * @param v
- * @param n
- * @return
- */
-t_vec3	reflect(t_vec3 v, t_vec3 n)
-{
-	return (vminus(v, vmult(n, vdot(v, n) * 2)));
 }
 
 /**
