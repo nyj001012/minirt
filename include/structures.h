@@ -6,7 +6,7 @@
 /*   By: jihyeole <jihyeole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 11:23:18 by yena              #+#    #+#             */
-/*   Updated: 2023/07/05 02:48:36 by jihyeole         ###   ########.fr       */
+/*   Updated: 2023/07/05 03:02:38 by jihyeole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,13 @@ struct s_sphere
 struct s_plane
 {
 	t_point3	point;
-	t_vector3	normal_vector;
+	t_vec3		normal_vector;
 };
 
 struct s_cylinder
 {
 	t_point3	center;
-	t_vector3	axis;
+	t_vec3		axis;
 	double		diameter;
 	double		height;
 };
