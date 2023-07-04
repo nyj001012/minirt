@@ -23,12 +23,13 @@ OBJS = ${SRCS:.c=.o}
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
+LFLAGS = -L libft -lft -L minilibx -lmlx
 RM = rm -f
 
 all:	${NAME}
 
 ${NAME}: ${OBJS}
-		${CC} ${CFLAGS} -o ${NAME} ${OBJS}
+		${CC} ${CFLAGS} ${LFLAGS} -o ${NAME} ${OBJS}
 
 %.o: %.c
 		${CC} ${CFLAGS} -I include -c $< -o ${<:.c=.o}
