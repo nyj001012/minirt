@@ -23,7 +23,8 @@ OBJS = ${SRCS:.c=.o}
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
-LFLAGS = -L libft -lft -L minilibx -lmlx
+LFLAGS = -L libft -L minilibx -framework OpenGL -framework AppKit
+INC = -I include -I libft -I minilibx
 RM = rm -f
 
 all:	${NAME}
@@ -32,7 +33,7 @@ ${NAME}: ${OBJS}
 		${CC} ${CFLAGS} ${LFLAGS} -o ${NAME} ${OBJS}
 
 %.o: %.c
-		${CC} ${CFLAGS} -I include -c $< -o ${<:.c=.o}
+		${CC} ${CFLAGS} ${INC} -c $< -o ${<:.c=.o}
 
 clean:
 		${RM} ${OBJS}
