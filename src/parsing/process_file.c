@@ -6,11 +6,13 @@
 /*   By: jihyeole <jihyeole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:52:02 by jihyeole          #+#    #+#             */
-/*   Updated: 2023/07/05 04:46:10 by jihyeole         ###   ########.fr       */
+/*   Updated: 2023/07/07 03:43:03 by jihyeole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+#include "utils.h"
+#include "scene.h"
 
 static void	is_valid_filename(char *filename)
 {
@@ -24,61 +26,67 @@ static void	is_valid_filename(char *filename)
 	}
 }
 
-void	free_arr(char **line_arr)
-{
-	int	i;
-
-	i = 0;
-	while (line_arr[i])
-	{
-		free(line_arr[i]);
-		++i;
-	}
-	free(line_arr);
-}
-
-void foo()
+void	foo()
 {
 	return ;
 }
 
+void	normalize_rgb(double *rgb)
+{
+	rgb[0] /= 255;
+	rgb[1] /= 255;
+	rgb[2] /= 255;
+}
+
 void	put_ambient_info(char **line_arr, t_scene *scene)
 {
-	// 추가하기 
-	(void)line_arr;
-	(void)scene;
-}
+	double	ka;
+	double	rgb[3];
 
-int	cnt_arr_num(char **arr)
-{
-	int	i;
-
-	if (!arr)
-		return (-1);
-	i = 0;
-	while (arr[i])
-		++i;
-	return (i);
-}
-
-void	format_error(void)
-{
-	ft_putstr_fd("Error\nInvalid data format in the file\n", 2);
-	exit(1);
+	if (cnt_arr_num(line_arr) != 3)
+		format_error();
+	if (!is_double(line_arr[1]))
+		format_error();
+	ka = str_to_double(line_arr[1]);
+	check_range(ka, 0, 1);
+	get_xyz_from_to(line_arr[2], 0, 255, rgb);
+	normalize_rgb(rgb);
+	scene->ambient = vmult_(color3(rgb[0], rgb[1], rgb[2]), ka);
 }
 
 void	put_camera_info(char **line_arr, t_scene *scene)
 {
-	char	**xyz_arr;
-	// double	xyz[3];
+	double	xyz[3];
+	double	fov;
 
-	(void)scene;
 	if (cnt_arr_num(line_arr) != 4)
 		format_error();
-	xyz_arr = ft_split(line_arr[1], ',');
-	if (cnt_arr_num(xyz_arr) != 3)
+	get_xyz(line_arr[1], xyz);
+	scene->camera.origin = point3(xyz[0], xyz[1], xyz[2]);
+	get_xyz_from_to(line_arr[2], -1, 1, xyz);
+	scene->camera.norm_orient = vec3(xyz[0], xyz[1], xyz[2]);
+	if (!is_double(line_arr[3]))
 		format_error();
-	free(xyz_arr);
+	fov = str_to_double(line_arr[3]);
+	check_range(fov, 0, 180);
+	scene->camera.fov = fov;
+}
+
+void	put_light_info(char **line_arr, t_scene *scene)
+{
+	double	origin[3];
+	double	brightness;
+
+	if (cnt_arr_num(line_arr) != 3)
+		format_error();
+	get_xyz(line_arr[1], origin);
+	if (!is_double(line_arr[2]))
+		format_error();
+	brightness = str_to_double(line_arr[2]);
+	check_range(brightness, 0, 1);
+	scene->light = object(LIGHT_POINT, \
+	light_point(point3(origin[0], origin[1], origin[2]), \
+	color3(1, 1, 1), brightness), color3(0, 0, 0));
 }
 
 void	put_info_from_line_arr(char **line_arr, t_scene *scene)
@@ -88,7 +96,7 @@ void	put_info_from_line_arr(char **line_arr, t_scene *scene)
 	else if (ft_strncmp(line_arr[0], "C", 2) == 0)
 		put_camera_info(line_arr, scene);
 	else if (ft_strncmp(line_arr[0], "L", 2) == 0)
-		foo();
+		put_light_info(line_arr, scene);
 	else if (ft_strncmp(line_arr[0], "sp", 3) == 0)
 		foo();
 	else if (ft_strncmp(line_arr[0], "pl", 3) == 0)
