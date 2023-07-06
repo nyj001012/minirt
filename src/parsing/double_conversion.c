@@ -6,7 +6,7 @@
 /*   By: jihyeole <jihyeole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 02:39:00 by jihyeole          #+#    #+#             */
-/*   Updated: 2023/07/07 02:40:20 by jihyeole         ###   ########.fr       */
+/*   Updated: 2023/07/07 05:26:45 by jihyeole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ double	str_to_double(char *str)
 	double	integer;
 	double	decimal;
 
+	if (!is_double(str))
+		format_error();
 	num_arr = ft_split(str, '.');
 	if (!num_arr[1])
 	{

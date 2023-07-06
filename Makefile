@@ -26,6 +26,8 @@ SRCS =	src/mlx/mlx_utils.c \
 		src/parsing/double_conversion.c\
 		src/parsing/parsing_utils.c\
 		src/parsing/get_xyz.c\
+		src/parsing/put_acl.c\
+		src/parsing/put_object.c\
 		src/main.c
 OBJS = ${SRCS:.c=.o}
 

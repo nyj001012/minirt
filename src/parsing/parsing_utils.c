@@ -6,7 +6,7 @@
 /*   By: jihyeole <jihyeole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 02:42:18 by jihyeole          #+#    #+#             */
-/*   Updated: 2023/07/07 03:06:08 by jihyeole         ###   ########.fr       */
+/*   Updated: 2023/07/07 06:16:09 by jihyeole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,11 @@ void	format_error(void)
 {
 	ft_putstr_fd("Error\nInvalid data format in the file\n", 2);
 	exit(1);
+}
+
+void	normalize_rgb(double *rgb)
+{
+	rgb[0] /= 255;
+	rgb[1] /= 255;
+	rgb[2] /= 255;
 }

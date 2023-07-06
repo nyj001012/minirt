@@ -6,7 +6,7 @@
 /*   By: jihyeole <jihyeole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 14:30:37 by yena              #+#    #+#             */
-/*   Updated: 2023/07/05 04:19:22 by jihyeole         ###   ########.fr       */
+/*   Updated: 2023/07/07 06:10:24 by jihyeole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int argc, char *argv[])
 	process_file(argv[1], &scene);
 	initialize_mlx_info(&mlx_info);
 	// TODO => 파싱으로부터 구조체 반환 받고 진행
-	mlx_info.scene = scene_init(mlx_info);
+	mlx_info.scene = &scene;
 	render_scene(&mlx_info);
 	mlx_key_hook(mlx_info.mlx_window, key_hook, &mlx_info);
 	mlx_hook(mlx_info.mlx_window, 17, 0, destroy_window, &mlx_info);
