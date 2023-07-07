@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object_create.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: jihyeole <jihyeole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 11:23:18 by yena              #+#    #+#             */
-/*   Updated: 2023/07/04 13:47:42 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/07 05:00:52 by jihyeole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,49 @@ t_sphere	*sphere(t_point3 center, double radius)
 	sphere->radius = radius;
 	sphere->radius_square = radius * radius;
 	return (sphere);
+}
+
+/**
+ * @brief plane 동적 할당하는 생성자
+ * plane의 멤버변수 값을 초기화하는 매개변수 생성자
+ * @param point
+ * @param normal_vector 
+ * @return t_plane* 
+ */
+t_plane	*plane(t_point3 point, t_vec3 normal_vector)
+{
+	t_plane	*plane;
+
+	plane = (t_plane *)malloc(sizeof(t_plane));
+	if (!plane)
+		return (NULL);
+	plane->point = point;
+	plane->normal_vector = normal_vector;
+	return (plane);
+}
+
+/**
+ * @brief cylinder 동적 할당하는 생성자
+ * cylinder의 멤버변수 값을 초기화하는 매개변수 생성자
+ * @param center
+ * @param axis 
+ * @param diameter 
+ * @param height
+ * @return t_cylinder* 
+ */
+t_cylinder	*cylinder(t_point3 center, t_vec3 axis, double diameter,
+				double height)
+{
+	t_cylinder	*cylinder;
+
+	cylinder = (t_cylinder *)malloc(sizeof(t_cylinder));
+	if (!cylinder)
+		return (NULL);
+	cylinder->center = center;
+	cylinder->axis = axis;
+	cylinder->diameter = diameter;
+	cylinder->height = height;
+	return (cylinder);
 }
 
 /**

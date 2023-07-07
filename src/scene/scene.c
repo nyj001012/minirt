@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: jihyeole <jihyeole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 15:00:57 by yena              #+#    #+#             */
-/*   Updated: 2023/07/04 17:12:38 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/07 05:08:15 by jihyeole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_scene	*scene_init(t_mlx_info mlx_info)
 	if (!scene)
 		return (NULL);
 	scene->canvas = canvas(mlx_info.window_width, mlx_info.window_height);
-	scene->camera = camera(&scene->canvas, point3(0, 0, 0));
+	scene->camera = camera(&scene->canvas, point3(0, 0, 0), vec3(0, 0, 0), 0.0);
 	world = object(SP, sphere(point3(-2, 0, -5), 2), color3(0.5, 0, 0));
 	oadd(&world,
 		object(SP, sphere(point3(0, -1000, -0), 995), color3(1, 1, 1)));
@@ -53,7 +53,8 @@ t_scene	*scene_init(t_mlx_info mlx_info)
  * @param origin 
  * @return t_camera 
  */
-t_camera	camera(t_canvas *canvas, t_point3 origin)
+t_camera	camera(t_canvas *canvas, t_point3 origin, t_vec3 norm_orient,
+				double fov)
 {
 	t_camera	cam;
 	double		focal_len;
@@ -74,5 +75,7 @@ t_camera	camera(t_canvas *canvas, t_point3 origin)
 					), vdivide_(cam.vertical, 2)
 				), vec3(0, 0, cam.focal_len)
 			);
+	cam.norm_orient = norm_orient;
+	cam.fov = fov;
 	return (cam);
 }

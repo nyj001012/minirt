@@ -21,6 +21,13 @@ SRCS =	src/mlx/mlx_utils.c \
 		src/utils/vec3/vec3_mult.c \
 		src/utils/vec3/vec3_plus.c \
 		src/utils/vec3/vec3_length.c \
+		src/parsing/process_file.c\
+		src/parsing/split_line.c\
+		src/parsing/double_conversion.c\
+		src/parsing/parsing_utils.c\
+		src/parsing/get_xyz.c\
+		src/parsing/put_acl.c\
+		src/parsing/put_object.c\
 		src/main.c
 OBJS = ${SRCS:.c=.o}
 
