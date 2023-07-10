@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 11:23:18 by yena              #+#    #+#             */
-/*   Updated: 2023/07/10 15:08:01 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/10 15:55:42 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 
 # define KSN 64
 # define KS 0.5
+# define TOP 1
+# define BOTTOM 2
 
 t_ray		ray(t_point3 origin, t_vec3 direction);
 t_point3	ray_at(t_ray *ray, double t);

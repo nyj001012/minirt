@@ -7,6 +7,7 @@ SRCS =	src/mlx/mlx_utils.c \
 		src/scene/render_scene.c \
 		src/scene/scene.c \
 		src/trace/hit/hit_sphere.c \
+		src/trace/hit/hit_cylinder.c \
 		src/trace/hit/hit.c \
 		src/trace/hit/normal.c \
 		src/trace/ray/phong_lighting.c \
