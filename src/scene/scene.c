@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jihyeole <jihyeole@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 15:00:57 by yena              #+#    #+#             */
-/*   Updated: 2023/07/07 05:08:15 by jihyeole         ###   ########.fr       */
+/*   Updated: 2023/07/10 14:58:29 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/scene.h"
 
 /**
+ * @deprecated 구 모듈 동작 확인 용 scene 초기화 함수
  * @brief scene을 초기화한다.
- * 추후 scene에 object와 light를 매개 변수로 받아와 추가할 수 있도록 한다.
  * @param mlx_info
  * @return t_scene* 초기화된 scene
  */
