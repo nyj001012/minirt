@@ -6,7 +6,7 @@
 /*   By: jihyeole <jihyeole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 06:14:00 by jihyeole          #+#    #+#             */
-/*   Updated: 2023/07/07 06:14:39 by jihyeole         ###   ########.fr       */
+/*   Updated: 2023/07/10 15:07:37 by jihyeole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,18 @@ void	put_plane_info(char **line_arr, t_scene *scene)
 {
 	double	xyz[3];
 	double	normal[3];
+	t_vec3	normal_vec;
 	double	rgb[3];
 
 	if (cnt_arr_num(line_arr) != 4)
 		format_error();
 	get_xyz(line_arr[1], xyz);
 	get_xyz_from_to(line_arr[2], -1, 1, normal);
+	normal_vec = vunit(vec3(normal[0], normal[1], normal[2]));
 	get_xyz_from_to(line_arr[3], 0, 255, rgb);
 	normalize_rgb(rgb);
 	oadd(&scene->world, object(PL, plane(point3(xyz[0], xyz[1], xyz[2]), \
-	vec3(normal[0], normal[1], normal[2])), color3(rgb[0], rgb[1], rgb[2])));
+	normal_vec), color3(rgb[0], rgb[1], rgb[2])));
 }
 
 void	put_cylinder_info(char **line_arr, t_scene *scene)
@@ -68,6 +70,6 @@ void	put_cylinder_info(char **line_arr, t_scene *scene)
 	normalize_rgb(rgb);
 	oadd(&scene->world, object(CY, \
 	cylinder(point3(center[0], center[1], center[2]), \
-	vec3(axis[0], axis[1], axis[2]), diameter, height), \
+	vunit(vec3(axis[0], axis[1], axis[2])), diameter, height), \
 	color3(rgb[0], rgb[1], rgb[2])));
 }
