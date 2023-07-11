@@ -6,7 +6,7 @@
 /*   By: jihyeole <jihyeole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 11:23:18 by yena              #+#    #+#             */
-/*   Updated: 2023/07/12 02:47:46 by jihyeole         ###   ########.fr       */
+/*   Updated: 2023/07/12 05:25:36 by jihyeole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,6 @@ struct s_camera
 	t_vec3		vertical;
 	double		focal_len;
 	t_point3	left_bottom;
-	t_vec3		norm_orient;
-	double		fov;
 };
 
 struct s_canvas
