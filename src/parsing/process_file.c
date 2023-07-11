@@ -6,7 +6,7 @@
 /*   By: jihyeole <jihyeole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:52:02 by jihyeole          #+#    #+#             */
-/*   Updated: 2023/07/07 06:28:49 by jihyeole         ###   ########.fr       */
+/*   Updated: 2023/07/12 06:06:08 by jihyeole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,14 @@ void	process_lines_from_file(int fd, t_scene *scene)
 			exit(1);
 		}
 		free(line);
+		line = get_next_line(fd);
 		if (!line_arr[0])
 		{
-			line = get_next_line(fd);
+			free_arr(line_arr);
 			continue ;
 		}
 		put_info_from_line_arr(line_arr, scene, acl);
 		free_arr(line_arr);
-		line = get_next_line(fd);
 	}
 	if (acl[0] != 1 || acl[1] != 1 || acl[2] != 1)
 		format_error();
