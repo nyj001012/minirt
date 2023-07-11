@@ -6,7 +6,7 @@
 /*   By: jihyeole <jihyeole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 06:11:46 by jihyeole          #+#    #+#             */
-/*   Updated: 2023/07/10 15:04:31 by jihyeole         ###   ########.fr       */
+/*   Updated: 2023/07/12 02:53:24 by jihyeole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	put_camera_info(char **line_arr, t_scene *scene)
 	orient_vec = vunit(vec3(orient[0], orient[1], orient[2]));
 	fov = str_to_double(line_arr[3]);
 	check_range(fov, 0, 180);
+	if (fov == 0 || fov == 180)
+		format_error();
 	scene->canvas = canvas(1280, 720);
 	scene->camera = camera(&scene->canvas, \
 	point3(point[0], point[1], point[2]), orient_vec, fov);

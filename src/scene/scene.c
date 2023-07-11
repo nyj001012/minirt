@@ -6,7 +6,7 @@
 /*   By: jihyeole <jihyeole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 15:00:57 by yena              #+#    #+#             */
-/*   Updated: 2023/07/07 05:08:15 by jihyeole         ###   ########.fr       */
+/*   Updated: 2023/07/12 02:48:09 by jihyeole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,10 @@ t_camera	camera(t_canvas *canvas, t_point3 origin, t_vec3 norm_orient,
 	double		viewport_height;
 
 	viewport_height = 2.0;
-	focal_len = 1.0;
-	cam.origin = origin;
 	cam.viewport_height = viewport_height;
 	cam.viewport_width = viewport_height * canvas->aspect_ratio;
+	focal_len = 1.0;
+	cam.origin = origin;
 	cam.focal_len = focal_len;
 	cam.horizontal = vec3(cam.viewport_width, 0, 0);
 	cam.vertical = vec3(0, cam.viewport_height, 0);
