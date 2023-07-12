@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 15:00:59 by yena              #+#    #+#             */
-/*   Updated: 2023/07/12 14:06:28 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/12 14:41:51 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ t_bool	hit_cylinder_cap(t_object *cy_obj, t_ray *ray, t_hit_record *rec,
 					int top_or_bottom)
 {
 	t_cylinder	*cy;
-	t_vec3	center;
-	t_vec3	oc;
-	double	root;
+	t_vec3		center;
+	t_vec3		oc;
+	double		root;
 
 	cy = cy_obj->element;
 	if (top_or_bottom == TOP)
@@ -40,8 +40,8 @@ t_bool	hit_cylinder_cap(t_object *cy_obj, t_ray *ray, t_hit_record *rec,
 	oc = vminus(center, ray->origin);
 	root = vdivide(
 			vdot(oc, cy->axis),
-			vdot(ray->direction, cy->axis));
-			)
+			vdot(ray->direction, cy->axis)
+			);
 	if (fabs(root) > cy->radius)
 		return (FALSE);
 	if (root < rec->tmin || root > rec->tmax)
@@ -51,6 +51,91 @@ t_bool	hit_cylinder_cap(t_object *cy_obj, t_ray *ray, t_hit_record *rec,
 	rec->normal = vunit(vminus(rec->p, center));
 	set_face_normal(ray, rec);
 	rec->albedo = cy_obj->albedo;
+	return (TRUE);
+}
+
+/**
+ * @brief 원기둥과 광선의 교차 여부를 판단하는 함수
+ * 짝수 근의 공식을 이용하여 원기둥과 광선의 교차 여부를 판단한다.
+ * @param a
+ * @param half_b
+ * @param c
+ * @param rec
+ * @return
+ */
+double	get_cy_root(double a, double half_b, double c, t_hit_record *rec)
+{
+	double	root;
+
+	root = (-half_b - c) / a;
+	if (root < rec->tmin || root > rec->tmax)
+	{
+		root = (-half_b + c) / a;
+		if (root < rec->tmin || root > rec->tmax)
+			return (0);
+	}
+	return (root);
+}
+
+/**
+ * @brief 원기둥과 광선의 교차 여부를 판단하는 함수
+ * 원기둥의 방정식: ((ray - cy_obj->center) * (cy_obj * axis)) ^ 2 = r^2.
+ * 즉, 원기둥의 중심에서 광선이 hit한 지점으로 향하는 벡터와 원기둥의 축이 뚜껑으로 이루는 평면에
+ * 수직인 벡터의 내적이 원기둥의 반지름의 제곱과 같다.
+ * 광선의 방정식: ray(t) = A + tB. (A: 광선의 원점, B: 광선의 방향)
+ * 광선의 방정식을 원기둥의 방정식에 대입하여 광선이 원기둥에 닿는지 확인한다.
+ * @param ray
+ * @param cy
+ * @param discriminant
+ * @param rec
+ * @return
+ */
+double	get_cy_discriminant_and_root(t_ray *ray, t_cylinder *cy,
+					double *discriminant, t_hit_record *rec)
+{
+	t_vec3	cross_micro_o;
+	t_vec3	cross_pe_o;
+	double	a;
+	double	half_b;
+	double	sqrt_d;
+
+	cross_micro_o = vcross(ray->direction, cy->axis);
+	cross_pe_o = vcross(vminus(ray->origin, cy->center), cy->axis);
+	a = vlength2(cross_ray_cylinder);
+	half_b = vdot(cross_ray_cylinder, cross_pe_o);
+	c = vlength2(cross_pe_o) - pow(cy->radius, 2);
+	*discriminant = pow(half_b, 2) - a * c;
+	if (*discriminant < 0)
+		return (0);
+	sqrt_d = sqrt(*discriminant);
+	return (get_cy_root(a, half_b, sqrt_d, rec));
+}
+
+/**
+ * @brief 원기둥의 옆면과 광선의 교차 여부를 판단하는 함수
+ * 광선의 방정식을 원기둥의 방정식에 대입하여 광선이 원기둥의 옆면에 닿는지 확인한다.
+ * @param cy_obj
+ * @param ray
+ * @param rec
+ * @return
+ */
+t_bool	hit_cylinder_side(t_object *cy_obj, t_ray *ray, t_hit_record *rec)
+{
+	t_cylinder	*cy;
+	double		discriminant;
+	double		root;
+
+	cy = cy_obj->element;
+	root = get_cy_discriminant_and_root(ray, cy, &discriminant, rec);
+	if (discriminant < 0)
+		return (FALSE);
+	if (root < rec->tmin || rec->tmax < root)
+		return (FALSE);
+	rec->t = root;
+	rec->p = ray_at(ray, root);
+	rec->normal = vdivide_(vminus(rec->p, sp->center), sp->radius);
+	set_face_normal(ray, rec);
+	rec->albedo = sp_obj->albedo;
 	return (TRUE);
 }
 
@@ -67,7 +152,6 @@ t_bool	hit_cylinder_cap(t_object *cy_obj, t_ray *ray, t_hit_record *rec,
  */
 t_bool	hit_cylinder(t_object *cy_obj, t_ray *ray, t_hit_record *rec)
 {
-	// TODO => cylinder의 윗뚜껑, 아랫뚜껑, 옆면에 광선이 적중하면 return true
 	if (hit_cylinder_cap(cy_obj, ray, rec, TOP)
 		|| hit_cylinder_cap(cy_obj, ray, rec, BOTTOM)
 		|| hit_cylinder_side(cy_obj, ray, rec))
