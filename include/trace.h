@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 11:23:18 by yena              #+#    #+#             */
-/*   Updated: 2023/07/10 15:55:42 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/12 14:04:22 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "structures.h"
 # include "utils.h"
 # include <stdbool.h>
+# include <math.h>
 
 # define KSN 64
 # define KS 0.5
@@ -35,6 +36,8 @@ double		get_sp_discriminant_and_root(t_ray *ray, t_sphere *sp,
 				double *discriminant, t_hit_record *rec);
 t_bool		hit_sphere(t_object *sp_obj, t_ray *ray, t_hit_record *rec);
 t_bool		hit_cylinder(t_object *cy_obj, t_ray *ray, t_hit_record *rec);
+t_bool		hit_cylinder_cap(t_object *cy_obj, t_ray *ray, t_hit_record *rec,
+						   int top_or_bottom)
 void		set_face_normal(t_ray *r, t_hit_record *rec);
 t_color3	get_diffuse(t_scene *scene, t_light *light);
 t_color3	get_specular(t_scene *scene, t_light *light);
