@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 15:00:59 by yena              #+#    #+#             */
-/*   Updated: 2023/07/12 14:41:51 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/12 15:37:29 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,10 @@ t_bool	hit_cylinder_cap(t_object *cy_obj, t_ray *ray, t_hit_record *rec,
 	if (top_or_bottom == TOP)
 		center = vplus_(cy->center, 0, 0, cy->height / 2.0);
 	else
-		center = vplus_(cy->center, 0, 0, cy->height / -2.0);
-	oc = vminus(center, ray->origin);
-	root = vdivide(
-			vdot(oc, cy->axis),
-			vdot(ray->direction, cy->axis)
-			);
-	if (fabs(root) > cy->radius)
+		center = vplus_(cy->center, 0, 0, (cy->height / 2.0) * -1);
+	oc = vminus(ray->origin, center);
+	root = vdot(oc, cy->axis) / vdot(ray->direction, cy->axis);
+	if (fabs(root) > cy->diameter / 2.0)
 		return (FALSE);
 	if (root < rec->tmin || root > rec->tmax)
 		return (FALSE);
@@ -63,17 +60,13 @@ t_bool	hit_cylinder_cap(t_object *cy_obj, t_ray *ray, t_hit_record *rec,
  * @param rec
  * @return
  */
-double	get_cy_root(double a, double half_b, double c, t_hit_record *rec)
+double	get_cy_root(double a, double half_b, double sqrt_d, t_hit_record *rec)
 {
 	double	root;
 
-	root = (-half_b - c) / a;
-	if (root < rec->tmin || root > rec->tmax)
-	{
-		root = (-half_b + c) / a;
-		if (root < rec->tmin || root > rec->tmax)
-			return (0);
-	}
+	root = (-half_b - sqrt_d) / a;
+	if (root < rec->tmin || rec->tmax < root)
+		root = (-half_b + sqrt_d) / a;
 	return (root);
 }
 
@@ -97,18 +90,17 @@ double	get_cy_discriminant_and_root(t_ray *ray, t_cylinder *cy,
 	t_vec3	cross_pe_o;
 	double	a;
 	double	half_b;
-	double	sqrt_d;
+	double	c;
 
 	cross_micro_o = vcross(ray->direction, cy->axis);
 	cross_pe_o = vcross(vminus(ray->origin, cy->center), cy->axis);
-	a = vlength2(cross_ray_cylinder);
-	half_b = vdot(cross_ray_cylinder, cross_pe_o);
-	c = vlength2(cross_pe_o) - pow(cy->radius, 2);
+	a = vlength2(cross_micro_o);
+	half_b = vdot(cross_micro_o, cross_pe_o);
+	c = vlength2(cross_pe_o) - pow(cy->diameter / 2.0, 2);
 	*discriminant = pow(half_b, 2) - a * c;
 	if (*discriminant < 0)
 		return (0);
-	sqrt_d = sqrt(*discriminant);
-	return (get_cy_root(a, half_b, sqrt_d, rec));
+	return (get_cy_root(a, half_b, sqrt(*discriminant), rec));
 }
 
 /**
@@ -133,9 +125,9 @@ t_bool	hit_cylinder_side(t_object *cy_obj, t_ray *ray, t_hit_record *rec)
 		return (FALSE);
 	rec->t = root;
 	rec->p = ray_at(ray, root);
-	rec->normal = vdivide_(vminus(rec->p, sp->center), sp->radius);
+	rec->normal = vdivide_(vminus(rec->p, cy->center), cy->diameter / 2.0);
 	set_face_normal(ray, rec);
-	rec->albedo = sp_obj->albedo;
+	rec->albedo = cy_obj->albedo;
 	return (TRUE);
 }
 
@@ -152,9 +144,11 @@ t_bool	hit_cylinder_side(t_object *cy_obj, t_ray *ray, t_hit_record *rec)
  */
 t_bool	hit_cylinder(t_object *cy_obj, t_ray *ray, t_hit_record *rec)
 {
-	if (hit_cylinder_cap(cy_obj, ray, rec, TOP)
-		|| hit_cylinder_cap(cy_obj, ray, rec, BOTTOM)
-		|| hit_cylinder_side(cy_obj, ray, rec))
+	if (hit_cylinder_cap(cy_obj, ray, rec, TOP))
+		return (TRUE);
+	if (hit_cylinder_side(cy_obj, ray, rec))
+		return (TRUE);
+	if (hit_cylinder_cap(cy_obj, ray, rec, BOTTOM))
 		return (TRUE);
 	return (FALSE);
 }
