@@ -6,7 +6,7 @@
 /*   By: jihyeole <jihyeole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 06:11:46 by jihyeole          #+#    #+#             */
-/*   Updated: 2023/07/07 06:15:53 by jihyeole         ###   ########.fr       */
+/*   Updated: 2023/07/13 17:31:47 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,21 @@ void	put_ambient_info(char **line_arr, t_scene *scene)
 
 void	put_camera_info(char **line_arr, t_scene *scene)
 {
-	double	xyz[3];
+	double	origin_xyz[3];
+	double	norm_orient_xyz[3];
 	double	fov;
 
 	if (cnt_arr_num(line_arr) != 4)
 		format_error();
-	get_xyz(line_arr[1], xyz);
-	get_xyz_from_to(line_arr[2], -1, 1, xyz);
+	get_xyz(line_arr[1], origin_xyz);
+	get_xyz_from_to(line_arr[2], -1, 1, norm_orient_xyz);
 	fov = str_to_double(line_arr[3]);
 	check_range(fov, 0, 180);
 	scene->canvas = canvas(1280, 720);
-	scene->camera = camera(&scene->canvas, point3(xyz[0], xyz[1], xyz[2]), \
-	vec3(xyz[0], xyz[1], xyz[2]), fov);
+	scene->camera = camera(&scene->canvas,
+			point3(origin_xyz[0], origin_xyz[1], origin_xyz[2]),
+			vec3(norm_orient_xyz[0], norm_orient_xyz[1], norm_orient_xyz[2]),
+			fov);
 }
 
 void	put_light_info(char **line_arr, t_scene *scene)
