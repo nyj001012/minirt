@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 11:23:18 by yena              #+#    #+#             */
-/*   Updated: 2023/07/12 14:42:12 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/13 16:29:41 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,8 @@ double		get_sp_discriminant_and_root(t_ray *ray, t_sphere *sp,
 				double *discriminant, t_hit_record *rec);
 t_bool		hit_sphere(t_object *sp_obj, t_ray *ray, t_hit_record *rec);
 t_bool		hit_cylinder(t_object *cy_obj, t_ray *ray, t_hit_record *rec);
-t_bool		hit_cylinder_cap(t_object *cy_obj, t_ray *ray, t_hit_record *rec,
-				int top_or_bottom);
-t_bool		hit_cylinder_side(t_object *cy_obj, t_ray *ray, t_hit_record *rec);
-double		get_cy_root(double a, double half_b, double c, t_hit_record *rec);
-double		get_cy_discriminant_and_root(t_ray *ray, t_cylinder *cy,
-				double *discriminant, t_hit_record *rec);
+void		calculate_cy_equation(t_cylinder *cy, t_ray *ray, t_equation *eq);
+t_bool		get_cy_root(t_equation *eq, t_hit_record *rec);
 void		set_face_normal(t_ray *r, t_hit_record *rec);
 t_color3	get_diffuse(t_scene *scene, t_light *light);
 t_color3	get_specular(t_scene *scene, t_light *light);
