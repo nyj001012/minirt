@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 15:00:59 by yena              #+#    #+#             */
-/*   Updated: 2023/07/13 16:46:32 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/13 17:31:14 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@ void	calculate_cy_equation(t_cylinder *cy, t_ray *ray, t_equation *eq)
 	double	c;
 
 	oc = vminus(ray->origin, cy->center);
-	a = vdot(ray->direction, ray->direction) - pow(vdot(ray->direction, cy->axis), 2);
-	half_b = vdot(ray->direction, oc) - vdot(oc, cy->axis) * vdot(ray->direction, cy->axis);
+	a = vdot(ray->direction, ray->direction)
+		- pow(vdot(ray->direction, cy->axis), 2);
+	half_b = vdot(ray->direction, oc) - vdot(oc, cy->axis)
+		* vdot(ray->direction, cy->axis);
 	c = vdot(oc, oc) - pow(vdot(oc, cy->axis), 2) - pow(cy->diameter / 2.0, 2);
 	eq->a = a;
 	eq->half_b = half_b;
@@ -39,10 +41,10 @@ t_bool	get_cy_root(t_equation *eq, t_hit_record *rec)
 	if (eq->discriminant < 0)
 		return (FALSE);
 	root = (-eq->half_b - sqrt(eq->discriminant)) / eq->a;
-	if (root < rec->tmin || rec->tmax < root)
+	if (root < rec->tmin || root > rec->tmax)
 	{
 		root = (-eq->half_b + sqrt(eq->discriminant)) / eq->a;
-		if (root < rec->tmin || rec->tmax < root)
+		if (root < rec->tmin || root > rec->tmax)
 			return (FALSE);
 	}
 	eq->root = root;
@@ -75,7 +77,11 @@ t_bool	hit_cylinder(t_object *cy_obj, t_ray *ray, t_hit_record *rec)
 	hit_height = vdot(vminus(rec->p, cy->center), cy->axis);
 	if (hit_height < 0 || hit_height > cy->height)
 		return (FALSE);
-	rec->normal = vunit(vminus(rec->p, vplus(cy->center, vmult_(cy->axis, vdot(vminus(rec->p, cy->center), cy->axis)))));
+	rec->normal = vunit(
+			vminus(rec->p,
+				vplus(cy->center,
+					vmult_(cy->axis,
+						vdot(vminus(rec->p, cy->center), cy->axis)))));
 	set_face_normal(ray, rec);
 	rec->albedo = cy_obj->albedo;
 	return (TRUE);
