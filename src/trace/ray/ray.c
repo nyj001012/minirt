@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: jihyeole <jihyeole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 11:23:18 by yena              #+#    #+#             */
-/*   Updated: 2023/07/03 20:21:57 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/15 17:26:25 by jihyeole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,7 @@ t_ray	ray_primary(t_camera *cam, double u, double v)
 						cam->left_bottom, vmult_(cam->horizontal, u)
 						),
 					vmult_(cam->vertical, v)
-					), cam->origin
-				)
+					), cam->origin)
 			);
 	return (ray);
 }

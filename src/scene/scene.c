@@ -6,7 +6,7 @@
 /*   By: jihyeole <jihyeole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 15:00:57 by yena              #+#    #+#             */
-/*   Updated: 2023/07/12 05:25:31 by jihyeole         ###   ########.fr       */
+/*   Updated: 2023/07/15 19:18:01 by jihyeole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,22 +92,20 @@ t_camera	camera(t_canvas *canvas, t_point3 origin, t_vec3 norm_orient,
 				double fov)
 {
 	t_camera	cam;
-	double		viewport_height;
 	double		fov_radian;
+	t_point3	viewport_center;
 
-	viewport_height = 2.0;
-	cam.viewport_height = viewport_height;
-	cam.viewport_width = viewport_height * canvas->aspect_ratio;
+	cam.focal_len = 1.0;
 	fov_radian = fov * (M_PI / 180.0);
+	cam.viewport_width = 2 * cam.focal_len * tan(fov_radian / 2.0);
+	cam.viewport_height = cam.viewport_width / canvas->aspect_ratio;
 	cam.origin = origin;
-	cam.focal_len = cam.viewport_width / tan(fov_radian / 2.0);
 	calculate_cam_view(&cam, norm_orient);
+	viewport_center = vplus(norm_orient, cam.origin);
 	cam.left_bottom = vminus(
 			vminus(
-				vminus(
-					cam.origin, vdivide_(cam.horizontal, 2)
-					), vdivide_(cam.vertical, 2)
-				), vec3(0, 0, cam.focal_len)
+				viewport_center, vdivide_(cam.horizontal, 2)
+				), vdivide_(cam.vertical, 2)
 			);
 	return (cam);
 }
