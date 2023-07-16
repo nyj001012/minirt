@@ -62,8 +62,6 @@ struct s_camera
 	t_vec3		vertical;
 	double		focal_len;
 	t_point3	left_bottom;
-	t_vec3		norm_orient;
-	double		fov;
 };
 
 struct s_canvas

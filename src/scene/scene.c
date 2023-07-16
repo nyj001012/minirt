@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 15:00:57 by yena              #+#    #+#             */
-/*   Updated: 2023/07/10 14:58:29 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/15 19:18:01 by jihyeole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,41 @@ t_scene	*scene_init(t_mlx_info mlx_info)
 	return (scene);
 }
 
+static t_vec3	get_vertical(t_vec3 cam_dir, t_vec3 horizontal, double height)
+{
+	double	x;
+	double	z;
+
+	if (cam_dir.x == 0)
+	{
+		z = -1 * cam_dir.y / cam_dir.z;
+		x = (-1 * horizontal.y - horizontal.z * z) / horizontal.x;
+	}
+	else
+	{
+		z = (cam_dir.y * horizontal.x - cam_dir.x * horizontal.y) / \
+		(cam_dir.x * horizontal.z - cam_dir.z * horizontal.x);
+		x = (-1 * cam_dir.y - cam_dir.z * z) / cam_dir.x;
+	}
+	return (vmult_(vunit(vec3(x, 1, z)), height));
+}
+
+static void	calculate_cam_view(t_camera *cam, t_vec3 norm_orient)
+{
+	if (norm_orient.x == 0 && norm_orient.z == 0)
+	{
+		cam->horizontal = vec3(cam->viewport_width, 0, 0);
+		cam->vertical = vec3(0, 0, cam->viewport_height);
+	}
+	else
+	{
+		cam->horizontal = vmult_(vunit(vec3(norm_orient.z * -1, 0, \
+		norm_orient.x)), cam->viewport_width);
+		cam->vertical = get_vertical(norm_orient, cam->horizontal, \
+		cam->viewport_height);
+	}
+}
+
 /**
  * @brief 카메라의 위치를 설정하는 함수
  * 카메라의 죄하단의 좌표는
@@ -57,25 +92,20 @@ t_camera	camera(t_canvas *canvas, t_point3 origin, t_vec3 norm_orient,
 				double fov)
 {
 	t_camera	cam;
-	double		focal_len;
-	double		viewport_height;
+	double		fov_radian;
+	t_point3	viewport_center;
 
-	viewport_height = 2.0;
-	focal_len = 1.0;
+	cam.focal_len = 1.0;
+	fov_radian = fov * (M_PI / 180.0);
+	cam.viewport_width = 2 * cam.focal_len * tan(fov_radian / 2.0);
+	cam.viewport_height = cam.viewport_width / canvas->aspect_ratio;
 	cam.origin = origin;
-	cam.viewport_height = viewport_height;
-	cam.viewport_width = viewport_height * canvas->aspect_ratio;
-	cam.focal_len = focal_len;
-	cam.horizontal = vec3(cam.viewport_width, 0, 0);
-	cam.vertical = vec3(0, cam.viewport_height, 0);
+	calculate_cam_view(&cam, norm_orient);
+	viewport_center = vplus(norm_orient, cam.origin);
 	cam.left_bottom = vminus(
 			vminus(
-				vminus(
-					cam.origin, vdivide_(cam.horizontal, 2)
-					), vdivide_(cam.vertical, 2)
-				), vec3(0, 0, cam.focal_len)
+				viewport_center, vdivide_(cam.horizontal, 2)
+				), vdivide_(cam.vertical, 2)
 			);
-	cam.norm_orient = norm_orient;
-	cam.fov = fov;
 	return (cam);
 }

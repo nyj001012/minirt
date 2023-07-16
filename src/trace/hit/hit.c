@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: jihyeole <jihyeole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 15:01:06 by yena              #+#    #+#             */
-/*   Updated: 2023/07/10 15:01:17 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/12 18:05:00 by jihyeole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ t_bool	hit_obj(t_object *world, t_ray *ray, t_hit_record *rec)
 	hit_result = FALSE;
 	if (world->type == SP)
 		hit_result = hit_sphere(world, ray, rec);
+	if (world->type == PL)
+		hit_result = hit_plane(world, ray, rec);
 	if (world->type == CY)
 		hit_result = hit_cylinder(world, ray, rec);
 	return (hit_result);

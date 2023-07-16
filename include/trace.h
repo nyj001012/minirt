@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   trace.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: jihyeole <jihyeole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 11:23:18 by yena              #+#    #+#             */
 /*   Updated: 2023/07/13 16:29:41 by yena             ###   ########.fr       */
@@ -36,6 +36,7 @@ double		get_sp_root(double half_b, double sqrt_d, double a,
 double		get_sp_discriminant_and_root(t_ray *ray, t_sphere *sp,
 				double *discriminant, t_hit_record *rec);
 t_bool		hit_sphere(t_object *sp_obj, t_ray *ray, t_hit_record *rec);
+t_bool		hit_plane(t_object *pl_obj, t_ray *ray, t_hit_record *rec);
 t_bool		hit_cylinder(t_object *cy_obj, t_ray *ray, t_hit_record *rec);
 void		calculate_cy_equation(t_cylinder *cy, t_ray *ray, t_equation *eq);
 t_bool		get_cy_root(t_equation *eq, t_hit_record *rec);

@@ -7,6 +7,7 @@ SRCS =	src/mlx/mlx_utils.c \
 		src/scene/render_scene.c \
 		src/scene/scene.c \
 		src/trace/hit/hit_sphere.c \
+		src/trace/hit/hit_plane.c \
 		src/trace/hit/hit_cylinder.c \
 		src/trace/hit/hit.c \
 		src/trace/hit/normal.c \
@@ -22,13 +23,13 @@ SRCS =	src/mlx/mlx_utils.c \
 		src/utils/vec3/vec3_mult.c \
 		src/utils/vec3/vec3_plus.c \
 		src/utils/vec3/vec3_length.c \
-		src/parsing/process_file.c\
-		src/parsing/split_line.c\
-		src/parsing/double_conversion.c\
-		src/parsing/parsing_utils.c\
-		src/parsing/get_xyz.c\
-		src/parsing/put_acl.c\
-		src/parsing/put_object.c\
+		src/parsing/process_file.c \
+		src/parsing/split_line.c \
+		src/parsing/double_conversion.c \
+		src/parsing/parsing_utils.c \
+		src/parsing/get_xyz.c \
+		src/parsing/put_acl.c \
+		src/parsing/put_object.c \
 		src/main.c
 OBJS = ${SRCS:.c=.o}
 
