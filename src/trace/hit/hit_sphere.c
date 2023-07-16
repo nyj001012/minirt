@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 11:23:18 by yena              #+#    #+#             */
-/*   Updated: 2023/07/04 14:14:52 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/10 15:07:49 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
  * @param rec
  * @return double 실근
  */
-double	get_root(double half_b, double sqrt_d, double a, t_hit_record *rec)
+double	get_sp_root(double half_b, double sqrt_d, double a, t_hit_record *rec)
 {
 	double	root;
 
@@ -43,7 +43,7 @@ double	get_root(double half_b, double sqrt_d, double a, t_hit_record *rec)
  * @param root
  * @return double 실근
  */
-double	get_discriminant_and_root(t_ray *ray, t_sphere *sp,
+double	get_sp_discriminant_and_root(t_ray *ray, t_sphere *sp,
 					double *discriminant, t_hit_record *rec)
 {
 	t_vec3		oc;
@@ -60,7 +60,7 @@ double	get_discriminant_and_root(t_ray *ray, t_sphere *sp,
 	if (*discriminant < 0)
 		return (0);
 	sqrt_d = sqrt(*discriminant);
-	return (get_root(half_b, sqrt_d, a, rec));
+	return (get_sp_root(half_b, sqrt_d, a, rec));
 }
 
 /**
@@ -81,7 +81,7 @@ t_bool	hit_sphere(t_object *sp_obj, t_ray *ray, t_hit_record *rec)
 	double		root;
 
 	sp = sp_obj->element;
-	root = get_discriminant_and_root(ray, sp, &discriminant, rec);
+	root = get_sp_discriminant_and_root(ray, sp, &discriminant, rec);
 	if (discriminant < 0)
 		return (FALSE);
 	if (root < rec->tmin || rec->tmax < root)
