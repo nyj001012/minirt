@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: jihyeole <jihyeole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 15:00:57 by yena              #+#    #+#             */
-/*   Updated: 2023/07/15 19:18:01 by jihyeole         ###   ########.fr       */
+/*   Updated: 2023/07/18 06:49:39 by jihyeole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,27 +45,13 @@ t_scene	*scene_init(t_mlx_info mlx_info)
 	return (scene);
 }
 
-static t_vec3	get_vertical(t_vec3 cam_dir, t_vec3 horizontal, double height)
-{
-	double	x;
-	double	z;
-
-	if (cam_dir.x == 0)
-	{
-		z = -1 * cam_dir.y / cam_dir.z;
-		x = (-1 * horizontal.y - horizontal.z * z) / horizontal.x;
-	}
-	else
-	{
-		z = (cam_dir.y * horizontal.x - cam_dir.x * horizontal.y) / \
-		(cam_dir.x * horizontal.z - cam_dir.z * horizontal.x);
-		x = (-1 * cam_dir.y - cam_dir.z * z) / cam_dir.x;
-	}
-	return (vmult_(vunit(vec3(x, 1, z)), height));
-}
-
 static void	calculate_cam_view(t_camera *cam, t_vec3 norm_orient)
 {
+	t_vec3	vup;
+	t_vec3	w;
+
+	vup = vec3(0, 1, 0);
+	w = vunit(vminus(cam->origin, norm_orient));
 	if (norm_orient.x == 0 && norm_orient.z == 0)
 	{
 		cam->horizontal = vec3(cam->viewport_width, 0, 0);
@@ -73,10 +59,10 @@ static void	calculate_cam_view(t_camera *cam, t_vec3 norm_orient)
 	}
 	else
 	{
-		cam->horizontal = vmult_(vunit(vec3(norm_orient.z * -1, 0, \
-		norm_orient.x)), cam->viewport_width);
-		cam->vertical = get_vertical(norm_orient, cam->horizontal, \
-		cam->viewport_height);
+		cam->horizontal = vunit(vcross(vup, w));
+		cam->vertical = vmult_(vunit(vcross(w, cam->horizontal)), \
+			cam->viewport_height);
+		cam->horizontal = vmult_(cam->horizontal, cam->viewport_width);
 	}
 }
 
