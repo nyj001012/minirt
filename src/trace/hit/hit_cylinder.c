@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 15:00:59 by yena              #+#    #+#             */
-/*   Updated: 2023/07/17 13:33:07 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/17 13:34:28 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,11 @@ t_bool	get_cy_root(t_equation *eq)
  * @param root 
  * @return t_bool 
  */
-t_bool	check_hit_cylinder(t_cylinder *cy, t_ray *ray, t_hit_record *rec, double root)
+t_bool	check_hit_cylinder(t_cylinder *cy, t_ray *ray, t_hit_record *rec,
+						double root)
 {
 	double	hit_height;
-	
+
 	if (root < rec->tmin || root > rec->tmax || isnan(root))
 		return (FALSE);
 	rec->t = root;
@@ -98,10 +99,10 @@ t_bool	hit_cylinder(t_object *cy_obj, t_ray *ray, t_hit_record *rec)
 		&& !check_hit_cylinder(cy, ray, rec, eq.max_root))
 		return (FALSE);
 	rec->normal = vunit(
-		vminus(rec->p,
-			vplus(cy->center,
-				vmult_(cy->axis,
-					vdot(vminus(rec->p, cy->center), cy->axis)))));
+			vminus(rec->p,
+				vplus(cy->center,
+					vmult_(cy->axis,
+						vdot(vminus(rec->p, cy->center), cy->axis)))));
 	set_face_normal(ray, rec);
 	rec->albedo = cy_obj->albedo;
 	return (TRUE);
