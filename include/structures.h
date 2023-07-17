@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 11:23:18 by yena              #+#    #+#             */
-/*   Updated: 2023/07/13 16:28:48 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/17 13:08:51 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,8 @@ struct	s_equation
 	double	half_b;
 	double	c;
 	double	discriminant;
-	double	root;
+	double	min_root;
+	double	max_root;
 };
 
 #endif
