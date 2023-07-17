@@ -1,4 +1,4 @@
-NAME =	minirt
+NAME =	miniRT
 
 SRCS =	src/mlx/mlx_utils.c \
 		src/print/print.c \
