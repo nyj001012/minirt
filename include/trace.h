@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   trace.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jihyeole <jihyeole@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 11:23:18 by yena              #+#    #+#             */
-/*   Updated: 2023/07/13 16:29:41 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/17 13:15:56 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_bool		hit_sphere(t_object *sp_obj, t_ray *ray, t_hit_record *rec);
 t_bool		hit_plane(t_object *pl_obj, t_ray *ray, t_hit_record *rec);
 t_bool		hit_cylinder(t_object *cy_obj, t_ray *ray, t_hit_record *rec);
 void		calculate_cy_equation(t_cylinder *cy, t_ray *ray, t_equation *eq);
-t_bool		get_cy_root(t_equation *eq, t_hit_record *rec);
+t_bool		get_cy_root(t_equation *eq);
 void		set_face_normal(t_ray *r, t_hit_record *rec);
 t_color3	get_diffuse(t_scene *scene, t_light *light);
 t_color3	get_specular(t_scene *scene, t_light *light);
