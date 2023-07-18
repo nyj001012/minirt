@@ -6,7 +6,7 @@
 /*   By: jihyeole <jihyeole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 11:23:18 by yena              #+#    #+#             */
-/*   Updated: 2023/07/18 17:03:58 by jihyeole         ###   ########.fr       */
+/*   Updated: 2023/07/19 00:05:41 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_bool		hit_plane(t_object *pl_obj, t_ray *ray, t_hit_record *rec);
 t_bool		hit_cylinder(t_object *cy_obj, t_ray *ray, t_hit_record *rec);
 t_bool		hit_cylinder_base(t_cylinder *cy, t_ray *ray, t_hit_record *rec,
 				t_equation *eq);
+t_bool		hit_cone(t_object *cn_obj, t_ray *ray, t_hit_record *rec);
 void		calculate_cy_equation(t_cylinder *cy, t_ray *ray, t_equation *eq);
 t_bool		get_cy_root(t_equation *eq);
 void		set_face_normal(t_ray *r, t_hit_record *rec);
