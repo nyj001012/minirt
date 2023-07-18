@@ -6,7 +6,7 @@
 /*   By: jihyeole <jihyeole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:52:02 by jihyeole          #+#    #+#             */
-/*   Updated: 2023/07/19 00:00:56 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/19 02:51:44 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	put_info_from_line_arr(char **line_arr, t_scene *scene, int *acl)
 	else if (ft_strncmp(line_arr[0], "cy", 3) == 0)
 		put_cylinder_info(line_arr, scene);
 	else if (ft_strncmp(line_arr[0], "cn", 3) == 0)
-		put_cylinder_info(line_arr, scene);
+		put_cone_info(line_arr, scene);
 	else
 		format_error();
 }

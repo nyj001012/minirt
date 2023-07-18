@@ -6,7 +6,7 @@
 /*   By: jihyeole <jihyeole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 06:14:00 by jihyeole          #+#    #+#             */
-/*   Updated: 2023/07/19 00:01:07 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/19 02:42:53 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void	put_cone_info(char **line_arr, t_scene *scene)
 	double	axis[3];
 	double	radius;
 	double	height;
+	double	rgb[3];
 
 	if (cnt_arr_num(line_arr) != 6)
 		format_error();
@@ -88,11 +89,15 @@ void	put_cone_info(char **line_arr, t_scene *scene)
 	radius = str_to_double(line_arr[3]) / 2;
 	if (radius <= 0.0)
 		format_error();
-	radius_square = powf(radius, 2);
 	height = str_to_double(line_arr[4]);
 	if (height <= 0.0)
 		format_error();
-	get_xyz_from_to(line_arr[5], 0, 255, scene->rgb);
-	normalize_rgb(scene->rgb);
+	get_xyz_from_to(line_arr[5], 0, 255, rgb);
+	normalize_rgb(rgb);
 	oadd(&scene->world, object(CN,
+							cone(point3(center[0], center[1], center[2]),
+									vunit(vec3(axis[0], axis[1], axis[2])),
+									radius,
+									height),
+		 									color3(rgb[0], rgb[1], rgb[2])));
 }

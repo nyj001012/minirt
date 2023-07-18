@@ -6,13 +6,13 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 16:29:39 by yena              #+#    #+#             */
-/*   Updated: 2023/07/04 17:10:24 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/19 02:36:27 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scene_bonus.h"
 #include "trace_bonus.h"
-#include "mlx_bonus.h"
+#include "mlx.h"
 
 /**
  * @brief 캔버스의 픽셀에 해당하는 레이를 구한다.

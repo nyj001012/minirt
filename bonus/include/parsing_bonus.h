@@ -6,7 +6,7 @@
 /*   By: jihyeole <jihyeole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:51:12 by jihyeole          #+#    #+#             */
-/*   Updated: 2023/07/18 23:28:25 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/19 02:37:40 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 # define PARSING_H
 
 # include "libft.h"
-# include "structures.h"
-# include "utils.h"
-# include "scene.h"
+# include "structures_bonus.h"
+# include "utils_bonus.h"
+# include "scene_bonus.h"
 # include <fcntl.h>
 # include <stdio.h>
 

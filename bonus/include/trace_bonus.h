@@ -6,15 +6,15 @@
 /*   By: jihyeole <jihyeole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 11:23:18 by yena              #+#    #+#             */
-/*   Updated: 2023/07/19 00:05:41 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/19 02:36:07 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TRACE_H
 # define TRACE_H
 
-# include "structures.h"
-# include "utils.h"
+# include "structures_bonus.h"
+# include "utils_bonus.h"
 # include <stdbool.h>
 # include <math.h>
 

@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 15:00:44 by yena              #+#    #+#             */
-/*   Updated: 2023/07/04 16:43:44 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/19 02:35:49 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <math.h>
 # include <stdlib.h>
 # include <stdio.h>
-# include "structures.h"
+# include "structures_bonus.h"
 
 t_vec3		vec3(double x, double y, double z);
 t_point3	point3(double x, double y, double z);

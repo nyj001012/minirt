@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 15:15:40 by yena              #+#    #+#             */
-/*   Updated: 2023/07/04 15:50:26 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/19 02:35:22 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include "mlx.h"
-# include "structures.h"
+# include "structures_bonus.h"
 
 # define ESC 53
 
