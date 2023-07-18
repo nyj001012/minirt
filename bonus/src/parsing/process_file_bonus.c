@@ -6,7 +6,7 @@
 /*   By: jihyeole <jihyeole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:52:02 by jihyeole          #+#    #+#             */
-/*   Updated: 2023/07/19 02:51:44 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/19 04:01:34 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	put_info_from_line_arr(char **line_arr, t_scene *scene, int *acl)
 		put_ambient_info(line_arr, scene);
 	else if (ft_strncmp(line_arr[0], "C", 2) == 0)
 		put_camera_info(line_arr, scene);
-	else if (ft_strncmp(line_arr[0], "l", 2) == 0)
+	else if (ft_strncmp(line_arr[0], "L", 2) == 0)
 		put_light_info(line_arr, scene);
 	else if (ft_strncmp(line_arr[0], "sp", 3) == 0)
 		put_sphere_info(line_arr, scene);
