@@ -6,7 +6,7 @@
 /*   By: jihyeole <jihyeole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 11:23:18 by yena              #+#    #+#             */
-/*   Updated: 2023/07/18 15:06:47 by jihyeole         ###   ########.fr       */
+/*   Updated: 2023/07/18 17:03:58 by jihyeole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <math.h>
 
 # define KSN 64
-# define KS 0.5
+# define KS 0.4
 # define TOP 1
 # define BOTTOM 2
 

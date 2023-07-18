@@ -6,7 +6,7 @@
 /*   By: jihyeole <jihyeole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:52:02 by jihyeole          #+#    #+#             */
-/*   Updated: 2023/07/12 06:06:08 by jihyeole         ###   ########.fr       */
+/*   Updated: 2023/07/18 16:26:01 by jihyeole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,26 +24,19 @@ static void	is_valid_filename(char *filename)
 	}
 }
 
-void	is_unique_acl(int *acl, char *identifier)
+void	is_unique_acl(int *ac, char *identifier)
 {
 	if (ft_strncmp(identifier, "A", 2) == 0)
 	{
-		if (acl[0] == 0)
-			++acl[0];
+		if (ac[0] == 0)
+			++ac[0];
 		else
 			format_error();
 	}
 	else if (ft_strncmp(identifier, "C", 2) == 0)
 	{
-		if (acl[1] == 0)
-			++acl[1];
-		else
-			format_error();
-	}
-	else if (ft_strncmp(identifier, "L", 2) == 0)
-	{
-		if (acl[2] == 0)
-			++acl[2];
+		if (ac[1] == 0)
+			++ac[1];
 		else
 			format_error();
 	}
@@ -56,7 +49,7 @@ void	put_info_from_line_arr(char **line_arr, t_scene *scene, int *acl)
 		put_ambient_info(line_arr, scene);
 	else if (ft_strncmp(line_arr[0], "C", 2) == 0)
 		put_camera_info(line_arr, scene);
-	else if (ft_strncmp(line_arr[0], "L", 2) == 0)
+	else if (ft_strncmp(line_arr[0], "l", 2) == 0)
 		put_light_info(line_arr, scene);
 	else if (ft_strncmp(line_arr[0], "sp", 3) == 0)
 		put_sphere_info(line_arr, scene);
@@ -72,7 +65,7 @@ void	process_lines_from_file(int fd, t_scene *scene)
 {
 	char		*line;
 	char		**line_arr;
-	static int	acl[3];
+	static int	ac[2];
 
 	line = get_next_line(fd);
 	while (line)
@@ -90,10 +83,10 @@ void	process_lines_from_file(int fd, t_scene *scene)
 			free_arr(line_arr);
 			continue ;
 		}
-		put_info_from_line_arr(line_arr, scene, acl);
+		put_info_from_line_arr(line_arr, scene, ac);
 		free_arr(line_arr);
 	}
-	if (acl[0] != 1 || acl[1] != 1 || acl[2] != 1)
+	if (ac[0] != 1 || ac[1] != 1)
 		format_error();
 }
 
@@ -109,6 +102,7 @@ void	process_file(char *filename, t_scene *scene)
 		exit(1);
 	}
 	scene->world = NULL;
+	scene->light = NULL;
 	process_lines_from_file(fd, scene);
 	close(fd);
 }

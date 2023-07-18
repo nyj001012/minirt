@@ -6,7 +6,7 @@
 /*   By: jihyeole <jihyeole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 06:11:46 by jihyeole          #+#    #+#             */
-/*   Updated: 2023/07/15 17:25:34 by jihyeole         ###   ########.fr       */
+/*   Updated: 2023/07/18 16:57:00 by jihyeole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,16 @@ void	put_light_info(char **line_arr, t_scene *scene)
 {
 	double	origin[3];
 	double	brightness;
+	double	rgb[3];
 
-	if (cnt_arr_num(line_arr) != 3)
+	if (cnt_arr_num(line_arr) != 4)
 		format_error();
 	get_xyz(line_arr[1], origin);
 	brightness = str_to_double(line_arr[2]);
 	check_range(brightness, 0, 1);
-	scene->light = object(LIGHT_POINT, \
+	get_xyz_from_to(line_arr[3], 0, 255, rgb);
+	normalize_rgb(rgb);
+	oadd(&scene->light, object(LIGHT_POINT, \
 	light_point(point3(origin[0], origin[1], origin[2]), \
-	color3(1, 1, 1), brightness), color3(0, 0, 0));
+	color3(rgb[0], rgb[1], rgb[2]), brightness), color3(0, 0, 0)));
 }
