@@ -6,7 +6,7 @@
 /*   By: jihyeole <jihyeole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:04:06 by jihyeole          #+#    #+#             */
-/*   Updated: 2023/07/18 15:05:57 by jihyeole         ###   ########.fr       */
+/*   Updated: 2023/07/18 18:15:10 by jihyeole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static double	distance(t_point3 a, t_point3 b)
 	return (result);
 }
 
-static double	get_cylinder_base_root(t_cylinder *cy, t_ray *ray, t_hit_record *rec,
-	t_point3 center)
+static double	get_cylinder_base_root(t_cylinder *cy, t_ray *ray,
+	t_hit_record *rec, t_point3 center)
 {
 	double		root;
 	t_point3	hit_point;

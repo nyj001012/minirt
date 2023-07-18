@@ -6,7 +6,7 @@
 /*   By: jihyeole <jihyeole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 11:23:18 by yena              #+#    #+#             */
-/*   Updated: 2023/07/15 17:26:25 by jihyeole         ###   ########.fr       */
+/*   Updated: 2023/07/18 16:57:56 by jihyeole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,17 +87,9 @@ t_hit_record	record_init(void)
  */
 t_color3	ray_color(t_scene *scene)
 {
-	double	t;
-
 	scene->rec = record_init();
 	if (hit(scene->world, &scene->ray, &scene->rec))
 		return (phong_lighting(scene));
 	else
-	{
-		t = 0.5 * (scene->ray.direction.y + 1.0);
-		return (vplus(
-				vmult_(color3(1, 1, 1), 1.0 - t),
-				vmult_(color3(0.5, 0.7, 1.0), t)
-			));
-	}
+		return (color3(1, 1, 1));
 }
