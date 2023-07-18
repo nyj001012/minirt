@@ -6,7 +6,7 @@
 /*   By: jihyeole <jihyeole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 15:00:59 by yena              #+#    #+#             */
-/*   Updated: 2023/07/17 13:34:28 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/18 15:04:45 by jihyeole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,14 @@
  */
 void	calculate_cy_equation(t_cylinder *cy, t_ray *ray, t_equation *eq)
 {
-	t_vec3	oc;
-	double	a;
-	double	half_b;
-	double	c;
+	t_vec3		oc;
+	double		a;
+	double		half_b;
+	double		c;
+	t_point3	underside_center;
 
-	oc = vminus(ray->origin, cy->center);
+	underside_center = vminus(cy->center, vmult_(cy->axis, cy->height / 2));
+	oc = vminus(ray->origin, underside_center);
 	a = vdot(ray->direction, ray->direction)
 		- pow(vdot(ray->direction, cy->axis), 2);
 	half_b = vdot(ray->direction, oc) - vdot(oc, cy->axis)
@@ -67,16 +69,47 @@ t_bool	get_cy_root(t_equation *eq)
 t_bool	check_hit_cylinder(t_cylinder *cy, t_ray *ray, t_hit_record *rec,
 						double root)
 {
-	double	hit_height;
+	double		hit_height;
+	t_point3	underside_center;
 
+	underside_center = vminus(cy->center, vmult_(cy->axis, cy->height / 2));
 	if (root < rec->tmin || root > rec->tmax || isnan(root))
 		return (FALSE);
 	rec->t = root;
 	rec->p = ray_at(ray, rec->t);
-	hit_height = vdot(vminus(rec->p, cy->center), cy->axis);
+	hit_height = vdot(vminus(rec->p, underside_center), cy->axis);
 	if (hit_height < 0 || hit_height > cy->height)
 		return (FALSE);
 	return (TRUE);
+}
+
+t_bool	hit_cylinder_side(t_cylinder *cy, t_ray *ray, t_hit_record *rec,
+	t_equation	*eq)
+{
+	t_point3	underside_center;
+	t_bool		hit;
+
+	underside_center = vminus(cy->center, vmult_(cy->axis, cy->height / 2));
+	hit = FALSE;
+	calculate_cy_equation(cy, ray, eq);
+	if (get_cy_root(eq) == FALSE)
+		return (FALSE);
+	if (check_hit_cylinder(cy, ray, rec, eq->min_root))
+	{
+		eq->root = eq->min_root;
+		hit = TRUE;
+	}
+	if (check_hit_cylinder(cy, ray, rec, eq->min_root))
+	{
+		eq->root = eq->max_root;
+		hit = TRUE;
+	}
+	if (!hit)
+		return (FALSE);
+	rec->normal = vunit(vminus(rec->p, vplus(underside_center, vmult_(cy->axis,
+						vdot(vminus(rec->p, underside_center), cy->axis)))));
+	set_face_normal(ray, rec);
+	return (hit);
 }
 
 /**
@@ -90,20 +123,22 @@ t_bool	hit_cylinder(t_object *cy_obj, t_ray *ray, t_hit_record *rec)
 {
 	t_equation	eq;
 	t_cylinder	*cy;
+	t_bool		hit;
 
 	cy = cy_obj->element;
-	calculate_cy_equation(cy, ray, &eq);
-	if (get_cy_root(&eq) == FALSE)
-		return (FALSE);
-	if (!check_hit_cylinder(cy, ray, rec, eq.min_root)
-		&& !check_hit_cylinder(cy, ray, rec, eq.max_root))
-		return (FALSE);
-	rec->normal = vunit(
-			vminus(rec->p,
-				vplus(cy->center,
-					vmult_(cy->axis,
-						vdot(vminus(rec->p, cy->center), cy->axis)))));
-	set_face_normal(ray, rec);
+	hit = FALSE;
+	eq.root = 0;
+	if (hit_cylinder_side(cy, ray, rec, &eq))
+		hit = TRUE;
+	if (hit_cylinder_base(cy, ray, rec, &eq))
+	{
+		rec->t = eq.root;
+		rec->p = ray_at(ray, rec->t);
+		rec->normal = cy->axis;
+		set_face_normal(ray, rec);
+		rec->front_face = TRUE;
+		hit = TRUE;
+	}
 	rec->albedo = cy_obj->albedo;
-	return (TRUE);
+	return (hit);
 }
