@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 00:05:40 by yena              #+#    #+#             */
-/*   Updated: 2023/07/19 01:27:39 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/19 04:00:07 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,21 @@
 void	calculate_cn_equation(t_cone *cn, t_ray *ray, t_equation *eq)
 {
 	t_vec3	oc;
-	double	h_div_r;
+	double	r_div_h;
 
 	oc = vminus(ray->origin, cn->center);
-	h_div_r = cn->height / cn->radius;
+	r_div_h = cn->radius / cn->height;
 	eq->a = vdot(ray->direction, ray->direction)
-		- (1 + pow(h_div_r, 2))
+		- (1 + pow(r_div_h, 2))
 		* pow(vdot(ray->direction, cn->axis), 2);
 	eq->half_b = vdot(ray->direction, oc)
-			+ pow(h_div_r * cn->radius, 2) * vdot(ray->direction, cn->axis)
-			- (1 + pow(h_div_r, 2))
+			+ r_div_h * cn->radius * vdot(ray->direction, cn->axis)
+			- (1 + pow(r_div_h, 2))
 			* vdot(oc, cn->axis)
 			* vdot(ray->direction, cn->axis);
 	eq->c = vdot(oc, oc)
-			+ 2 * cn->radius * h_div_r * vdot(oc, cn->axis)
-			- (1 + pow(h_div_r, 2))
+			+ 2 * cn->radius * r_div_h * vdot(oc, cn->axis)
+			- (1 + pow(r_div_h, 2))
 			* pow(vdot(oc, cn->axis), 2)
 			- cn->radius_square;
 	eq->discriminant = pow(eq->half_b, 2) - eq->a * eq->c;
@@ -49,23 +49,24 @@ void	calculate_cn_equation(t_cone *cn, t_ray *ray, t_equation *eq)
 t_bool	hit_cone_side(t_cone *cn, t_ray *ray, t_hit_record *rec, double root)
 {
 	double	hit_height;
-	t_vec3	ph;
+	t_vec3	q;
 
-	if (root < rec->t_min || root > rec->t_max || isnan(root))
+	if (root < rec->tmin || root > rec->tmax || isnan(root))
 		return (FALSE);
 	rec->t = root;
 	rec->p = ray_at(ray, rec->t);
 	hit_height = vdot(vminus(rec->p, cn->center), cn->axis);
 	if (hit_height < 0 || hit_height > cn->height)
 		return (FALSE);
-	ph = vunit(
+	hit_height = cn->height - hit_height;
+	q = vunit(
 			vminus(rec->p,
 				vplus(cn->center,
 					vmult_(cn->axis,
 						vdot(vminus(rec->p, cn->center),
 					cn->axis)))));
-	rec->normal = vunit(vplus(vmult_(cn->normal, cn->radius * hit_height / co->height),
-				vmult_(ph, hit_height)));
+	rec->normal = vunit(vplus(vmult_(cn->axis, cn->radius * hit_height / cn->height),
+				vmult_(q, hit_height)));
 	set_face_normal(ray, rec);
 	return (TRUE);
 }
@@ -75,6 +76,7 @@ t_bool	hit_cone(t_object *cn_obj, t_ray *ray, t_hit_record *rec)
 	t_cone		*cn;
 	t_equation	eq;
 
+	rec->albedo = cn_obj->albedo;
 	cn = cn_obj->element;
 	calculate_cn_equation(cn, ray, &eq);
 	if (eq.discriminant < 0)
