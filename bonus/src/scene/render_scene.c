@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scene.h"
-#include "trace.h"
-#include "mlx.h"
+#include "scene_bonus.h"
+#include "trace_bonus.h"
+#include "mlx_bonus.h"
 
 /**
  * @brief 캔버스의 픽셀에 해당하는 레이를 구한다.

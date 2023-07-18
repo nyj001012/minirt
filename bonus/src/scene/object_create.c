@@ -6,12 +6,12 @@
 /*   By: jihyeole <jihyeole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 11:23:18 by yena              #+#    #+#             */
-/*   Updated: 2023/07/07 05:00:52 by jihyeole         ###   ########.fr       */
+/*   Updated: 2023/07/19 00:01:34 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "structures.h"
-#include "scene.h"
+#include "structures_bonus.h"
+#include "scene_bonus.h"
 
 /**
  * @brief object를 동적 할당하는 생성자

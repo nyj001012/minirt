@@ -6,11 +6,11 @@
 /*   By: jihyeole <jihyeole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 03:57:44 by jihyeole          #+#    #+#             */
-/*   Updated: 2023/07/07 06:17:27 by jihyeole         ###   ########.fr       */
+/*   Updated: 2023/07/19 00:01:13 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "parsing_bonus.h"
 
 static size_t	word_cnt(const char *s, char c)
 {

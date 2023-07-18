@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/scene.h"
+#include "../include/scene_bonus.h"
 
 /**
  * @deprecated 구 모듈 동작 확인 용 scene 초기화 함수

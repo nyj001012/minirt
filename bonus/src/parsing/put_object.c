@@ -6,11 +6,11 @@
 /*   By: jihyeole <jihyeole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 06:14:00 by jihyeole          #+#    #+#             */
-/*   Updated: 2023/07/18 23:42:09 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/19 00:01:07 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "parsing_bonus.h"
 
 void	put_sphere_info(char **line_arr, t_scene *scene)
 {

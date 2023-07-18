@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "structures.h"
-#include "trace.h"
-#include "utils.h"
+#include "structures_bonus.h"
+#include "trace_bonus.h"
+#include "utils_bonus.h"
 
 /**
  * @brief 원기둥의 방정식과 광선의 방정식을 연립하여 근의 공식에 이용할 a, b/2, c를 구한다.

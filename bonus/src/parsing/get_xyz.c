@@ -6,11 +6,11 @@
 /*   By: jihyeole <jihyeole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 03:07:16 by jihyeole          #+#    #+#             */
-/*   Updated: 2023/07/07 06:34:16 by jihyeole         ###   ########.fr       */
+/*   Updated: 2023/07/19 00:00:45 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "parsing_bonus.h"
 
 void	get_xyz(char *xyz_str, double *xyz)
 {

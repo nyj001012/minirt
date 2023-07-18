@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "structures.h"
-#include "trace.h"
-#include "utils.h"
+#include "structures_bonus.h"
+#include "trace_bonus.h"
+#include "utils_bonus.h"
 
 /**
  * @brief 실근을 구하는 함수. 두 실근 중 tmin과 tmax 사이에 있는 실근을 구한다.

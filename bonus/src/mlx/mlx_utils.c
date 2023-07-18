@@ -6,11 +6,11 @@
 /*   By: jihyeole <jihyeole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 15:10:50 by yena              #+#    #+#             */
-/*   Updated: 2023/07/12 05:33:01 by jihyeole         ###   ########.fr       */
+/*   Updated: 2023/07/19 00:00:38 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx_utils.h"
+#include "mlx_utils_bonus.h"
 
 /**
  * @brief mlx_info를 동적 할당 없이 초기화한다.

@@ -6,11 +6,11 @@
 /*   By: jihyeole <jihyeole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 06:11:46 by jihyeole          #+#    #+#             */
-/*   Updated: 2023/07/18 16:57:00 by jihyeole         ###   ########.fr       */
+/*   Updated: 2023/07/19 00:01:01 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "parsing_bonus.h"
 
 void	put_ambient_info(char **line_arr, t_scene *scene)
 {

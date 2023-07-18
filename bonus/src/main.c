@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx_utils.h"
-#include "scene.h"
-#include "parsing.h"
+#include "mlx_utils_bonus.h"
+#include "scene_bonus.h"
+#include "parsing_bonus.h"
 
 int	main(int argc, char *argv[])
 {

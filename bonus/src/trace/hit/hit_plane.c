@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "structures.h"
-#include "trace.h"
-#include "utils.h"
+#include "structures_bonus.h"
+#include "trace_bonus.h"
+#include "utils_bonus.h"
 
 t_bool	hit_plane(t_object *pl_obj, t_ray *ray, t_hit_record *rec)
 {
