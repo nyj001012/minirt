@@ -32,12 +32,14 @@ RAW_SRCS =	src/mlx/mlx_utils \
 			src/parsing/put_acl \
 			src/parsing/put_object \
 			src/main
+
 MAN_SRCS = $(addsuffix .c, ${RAW_SRCS})
 MAN_OBJS = ${MAN_SRCS:.c=.o}
 
 BONUS_DIR = bonus
-BONUS_SRCS = $(addsuffix $(addprefix ${BONUS_DIR}/, ${RAW_SRCS}), _bonus.c)
-BONUS_SRCS += ${BONUS_DIR}/src/trace/hit/hit_cone_bonus.c
+BONUS_SRCS = $(addprefix ${BONUS_DIR}/, $(addsuffix _bonus.c, ${RAW_SRCS}))
+BONUS_SRCS += ${BONUS_DIR}/src/scene/object_create_bonus2.c \
+			  ${BONUS_DIR}/src/trace/hit/hit_cone_bonus.c
 BONUS_OBJS = ${BONUS_SRCS:.c=.o}
 
 MLX_DIR = minilibx
@@ -49,31 +51,31 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 LFLAGS = -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 INC = -I ${LIBFT_DIR} -I ${MLX_DIR}
+
 RM = rm -f
 
-all:	${NAME}
-
-bonus:
-	@make bonus=1 all
-
 ifdef bonus
+    INC += -I ${BONUS_DIR}/include
 	SRCS = ${BONUS_SRCS}
 	OBJS = ${BONUS_OBJS}
-	INC += -I ${BONUS_DIR}/include
 else
 	SRCS = ${MAN_SRCS}
 	OBJS = ${MAN_OBJS}
 	INC += -I include
 endif
 
+all: ${NAME}
+
+bonus:
+	@make bonus=1 all
+
 $(NAME): ${OBJS}
 		@make bonus -C libft
 		@make -C minilibx
 		@cp $(MLX_DIR)/$(MLX_LIB) .
-		@${CC} ${CFLAGS} ${LFLAGS} -o ${NAME} ${OBJS}
+		@${CC} ${CFLAGS} ${INC} ${LFLAGS} -o ${NAME} ${OBJS}
 
 %.o: %.c
-		echo $<
 		@${CC} ${CFLAGS} ${INC} -c $< -o ${<:.c=.o}
 
 clean:
@@ -89,4 +91,4 @@ fclean:	clean
 
 re:		fclean all
 
-.PHONY:	all clean fclean re bonus
+.PHONY: all clean fclean re bonus
