@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 23:39:37 by yena              #+#    #+#             */
-/*   Updated: 2023/07/19 16:01:29 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/19 18:04:23 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # define CN 4
 # define EPSILON 1e-6
 # define LUMEN 3
+# define CANVAS_WIDTH 1280
+# define CANVAS_HEIGHT 720
 
 typedef struct s_vec3		t_vec3;
 typedef struct s_vec3		t_point3;

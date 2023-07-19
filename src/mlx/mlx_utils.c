@@ -6,7 +6,7 @@
 /*   By: jihyeole <jihyeole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 15:10:50 by yena              #+#    #+#             */
-/*   Updated: 2023/07/12 05:33:01 by jihyeole         ###   ########.fr       */
+/*   Updated: 2023/07/19 18:05:10 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 void	initialize_mlx_info(t_mlx_info *mlx_info)
 {
 	mlx_info->mlx = mlx_init();
-	mlx_info->window_width = 1280;
-	mlx_info->window_height = 720;
+	mlx_info->window_width = CANVAS_WIDTH;
+	mlx_info->window_height = CANVAS_HEIGHT;
 	mlx_info->mlx_window = mlx_new_window(mlx_info->mlx,
 			mlx_info->window_width,
 			mlx_info->window_height,

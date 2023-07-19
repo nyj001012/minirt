@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 23:15:25 by yena              #+#    #+#             */
-/*   Updated: 2023/07/19 16:09:07 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/19 18:00:49 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	put_camera_info(char **line_arr, t_scene *scene)
 	check_range(fov, 0, 180);
 	if (fov == 0 || fov == 180)
 		format_error();
-	scene->canvas = canvas(1280, 720);
+	scene->canvas = canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 	scene->camera = camera(&scene->canvas, \
 	point3(point[0], point[1], point[2]), orient_vec, fov);
 }
