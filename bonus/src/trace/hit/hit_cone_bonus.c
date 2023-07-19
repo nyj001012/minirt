@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 00:05:40 by yena              #+#    #+#             */
-/*   Updated: 2023/07/19 16:03:58 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/19 20:00:30 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,24 @@ void	calculate_cn_equation(t_cone *cn, t_ray *ray, t_equation *eq)
 	eq->max_root = (-eq->half_b + sqrt(eq->discriminant)) / eq->a;
 }
 
+t_bool	hit_cone_base(t_cone *cn, t_ray *ray, t_hit_record *rec, t_equation *eq)
+{
+	t_vec3		oc;
+	double		hit_length;
+
+	oc = vminus(cn->center, ray->origin);
+	eq->root = vdot(oc, cn->axis) / vdot(ray->direction, cn->axis);
+	hit_length = vlength(vminus(cn->center, ray_at(ray, eq->root)));
+	if (hit_length > cn->radius
+		|| eq->root < rec->tmin || eq->root > rec->tmax)
+		return (FALSE);
+	rec->t = eq->root;
+	rec->p = ray_at(ray, rec->t);
+	rec->normal = vunit(oc);
+	set_face_normal(ray, rec);
+	return (TRUE);
+}
+
 t_bool	hit_cone_side(t_cone *cn, t_ray *ray, t_hit_record *rec, double root)
 {
 	double	hit_height;
@@ -79,6 +97,8 @@ t_bool	hit_cone(t_object *cn_obj, t_ray *ray, t_hit_record *rec)
 
 	rec->albedo = cn_obj->albedo;
 	cn = cn_obj->element;
+	if (hit_cone_base(cn, ray, rec, &eq))
+		return (TRUE);
 	calculate_cn_equation(cn, ray, &eq);
 	if (eq.discriminant < 0)
 		return (FALSE);
