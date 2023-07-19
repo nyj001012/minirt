@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 00:05:40 by yena              #+#    #+#             */
-/*   Updated: 2023/07/19 16:03:58 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/19 20:26:09 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,46 @@ void	calculate_cn_equation(t_cone *cn, t_ray *ray, t_equation *eq)
 	eq->max_root = (-eq->half_b + sqrt(eq->discriminant)) / eq->a;
 }
 
+/**
+ * @brief 원뿔의 밑면에 닿는지 판단한다.
+ * @see https://bigpel66.oopy.io/library/42/inner-circle/5\n
+ * - 6)Cone Intersection with Cap
+ * @param cn
+ * @param ray
+ * @param rec
+ * @param eq
+ * @return t_bool
+ */
+t_bool	hit_cone_base(t_cone *cn, t_ray *ray, t_hit_record *rec)
+{
+	t_vec3	oc;
+	double	ray_dir_dot_axis;
+
+	oc = vminus(cn->center, ray->origin);
+	ray_dir_dot_axis = vdot(ray->direction, cn->axis);
+	if (fabs(ray_dir_dot_axis) < EPSILON)
+		return (FALSE);
+	rec->t = vdot(oc, cn->axis) / ray_dir_dot_axis;
+	if (rec->t < rec->tmin || rec->t > rec->tmax)
+		return (FALSE);
+	rec->p = ray_at(ray, rec->t);
+	if (vdot(vminus(rec->p, cn->center), vminus(rec->p, cn->center))
+		> cn->radius_square)
+		return (FALSE);
+	rec->normal = vunit(vmult_(cn->axis, -1));
+	set_face_normal(ray, rec);
+	return (TRUE);
+}
+
+/**
+ * @brief 원뿔의 옆면에 닿는지 판단한다.
+ * @see https://github.com/miniRT-jiphyeonjeon/MiniRT/wiki/Cone
+ * @param cn
+ * @param ray
+ * @param rec
+ * @param root
+ * @return t_bool
+ */
 t_bool	hit_cone_side(t_cone *cn, t_ray *ray, t_hit_record *rec, double root)
 {
 	double	hit_height;
@@ -72,6 +112,13 @@ t_bool	hit_cone_side(t_cone *cn, t_ray *ray, t_hit_record *rec, double root)
 	return (TRUE);
 }
 
+/**
+ * @brief 광선이 원뿔의 옆면에 닿는지, 원뿔의 밑면에 닿는지 판단한다.
+ * @param cn_obj
+ * @param ray
+ * @param rec
+ * @return t_bool
+ */
 t_bool	hit_cone(t_object *cn_obj, t_ray *ray, t_hit_record *rec)
 {
 	t_cone		*cn;
@@ -79,6 +126,8 @@ t_bool	hit_cone(t_object *cn_obj, t_ray *ray, t_hit_record *rec)
 
 	rec->albedo = cn_obj->albedo;
 	cn = cn_obj->element;
+	if (hit_cone_base(cn, ray, rec))
+		return (TRUE);
 	calculate_cn_equation(cn, ray, &eq);
 	if (eq.discriminant < 0)
 		return (FALSE);
