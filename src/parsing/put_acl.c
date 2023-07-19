@@ -42,7 +42,7 @@ void	put_camera_info(char **line_arr, t_scene *scene)
 	check_range(fov, 0, 180);
 	if (fov == 0 || fov == 180)
 		format_error();
-	scene->canvas = canvas(1280, 720);
+	scene->canvas = canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 	scene->camera = camera(&scene->canvas, \
 	point3(point[0], point[1], point[2]), orient_vec, fov);
 }

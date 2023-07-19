@@ -19,8 +19,8 @@
 void	initialize_mlx_info(t_mlx_info *mlx_info)
 {
 	mlx_info->mlx = mlx_init();
-	mlx_info->window_width = 1280;
-	mlx_info->window_height = 720;
+	mlx_info->window_width = CANVAS_WIDTH;
+	mlx_info->window_height = CANVAS_HEIGHT;
 	mlx_info->mlx_window = mlx_new_window(mlx_info->mlx,
 			mlx_info->window_width,
 			mlx_info->window_height,
