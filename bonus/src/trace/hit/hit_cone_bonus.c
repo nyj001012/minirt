@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 00:05:40 by yena              #+#    #+#             */
-/*   Updated: 2023/07/19 04:00:07 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/19 16:03:58 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,15 @@ void	calculate_cn_equation(t_cone *cn, t_ray *ray, t_equation *eq)
 		- (1 + pow(r_div_h, 2))
 		* pow(vdot(ray->direction, cn->axis), 2);
 	eq->half_b = vdot(ray->direction, oc)
-			+ r_div_h * cn->radius * vdot(ray->direction, cn->axis)
-			- (1 + pow(r_div_h, 2))
-			* vdot(oc, cn->axis)
-			* vdot(ray->direction, cn->axis);
+		+ r_div_h * cn->radius * vdot(ray->direction, cn->axis)
+		- (1 + pow(r_div_h, 2))
+		* vdot(oc, cn->axis)
+		* vdot(ray->direction, cn->axis);
 	eq->c = vdot(oc, oc)
-			+ 2 * cn->radius * r_div_h * vdot(oc, cn->axis)
-			- (1 + pow(r_div_h, 2))
-			* pow(vdot(oc, cn->axis), 2)
-			- cn->radius_square;
+		+ 2 * cn->radius * r_div_h * vdot(oc, cn->axis)
+		- (1 + pow(r_div_h, 2))
+		* pow(vdot(oc, cn->axis), 2)
+		- cn->radius_square;
 	eq->discriminant = pow(eq->half_b, 2) - eq->a * eq->c;
 	eq->min_root = (-eq->half_b - sqrt(eq->discriminant)) / eq->a;
 	eq->max_root = (-eq->half_b + sqrt(eq->discriminant)) / eq->a;
@@ -64,8 +64,9 @@ t_bool	hit_cone_side(t_cone *cn, t_ray *ray, t_hit_record *rec, double root)
 				vplus(cn->center,
 					vmult_(cn->axis,
 						vdot(vminus(rec->p, cn->center),
-					cn->axis)))));
-	rec->normal = vunit(vplus(vmult_(cn->axis, cn->radius * hit_height / cn->height),
+							cn->axis)))));
+	rec->normal = vunit(vplus(
+				vmult_(cn->axis, cn->radius * hit_height / cn->height),
 				vmult_(q, hit_height)));
 	set_face_normal(ray, rec);
 	return (TRUE);

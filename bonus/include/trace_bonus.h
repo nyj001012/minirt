@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   trace.h                                            :+:      :+:    :+:   */
+/*   trace_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jihyeole <jihyeole@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/01 11:23:18 by yena              #+#    #+#             */
-/*   Updated: 2023/07/19 02:36:07 by yena             ###   ########.fr       */
+/*   Created: 2023/07/18 23:15:25 by yena              #+#    #+#             */
+/*   Updated: 2023/07/19 16:01:44 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TRACE_H
-# define TRACE_H
+#ifndef TRACE_BONUS_H
+# define TRACE_BONUS_H
 
 # include "structures_bonus.h"
 # include "utils_bonus.h"

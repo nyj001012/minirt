@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_object.c                                       :+:      :+:    :+:   */
+/*   put_object_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jihyeole <jihyeole@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/07 06:14:00 by jihyeole          #+#    #+#             */
-/*   Updated: 2023/07/19 02:42:53 by yena             ###   ########.fr       */
+/*   Created: 2023/07/18 23:44:03 by yena              #+#    #+#             */
+/*   Updated: 2023/07/19 16:09:15 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,9 @@ void	put_cone_info(char **line_arr, t_scene *scene)
 	get_xyz_from_to(line_arr[5], 0, 255, rgb);
 	normalize_rgb(rgb);
 	oadd(&scene->world, object(CN,
-							cone(point3(center[0], center[1], center[2]),
-									vunit(vec3(axis[0], axis[1], axis[2])),
-									radius,
-									height),
-		 									color3(rgb[0], rgb[1], rgb[2])));
+			cone(point3(center[0], center[1], center[2]),
+				vunit(vec3(axis[0], axis[1], axis[2])),
+				radius,
+				height),
+			color3(rgb[0], rgb[1], rgb[2])));
 }

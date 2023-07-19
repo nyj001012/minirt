@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx.h                                              :+:      :+:    :+:   */
+/*   mlx_utils_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/04 15:15:40 by yena              #+#    #+#             */
-/*   Updated: 2023/07/19 02:35:22 by yena             ###   ########.fr       */
+/*   Created: 2023/07/05 16:06:06 by yena              #+#    #+#             */
+/*   Updated: 2023/07/19 16:00:55 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MLX_UTILS_H
-# define MLX_UTILS_H
+#ifndef MLX_UTILS_BONUS_H
+# define MLX_UTILS_BONUS_H
 
 # include <stdlib.h>
 # include <stdio.h>
