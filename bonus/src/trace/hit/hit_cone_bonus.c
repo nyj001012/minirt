@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 00:05:40 by yena              #+#    #+#             */
-/*   Updated: 2023/07/19 20:00:30 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/19 20:11:01 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,15 @@ void	calculate_cn_equation(t_cone *cn, t_ray *ray, t_equation *eq)
 	eq->max_root = (-eq->half_b + sqrt(eq->discriminant)) / eq->a;
 }
 
+/**
+ * @brief 원뿔의 밑면에 닿는지 판단한다.
+ * t = ((C − O) ⋅ N) / D ⋅ N
+ * @param cn
+ * @param ray
+ * @param rec
+ * @param eq
+ * @return t_bool
+ */
 t_bool	hit_cone_base(t_cone *cn, t_ray *ray, t_hit_record *rec, t_equation *eq)
 {
 	t_vec3		oc;
@@ -64,6 +73,15 @@ t_bool	hit_cone_base(t_cone *cn, t_ray *ray, t_hit_record *rec, t_equation *eq)
 	return (TRUE);
 }
 
+/**
+ * @brief 원뿔의 옆면에 닿는지 판단한다.
+ * @see https://github.com/miniRT-jiphyeonjeon/MiniRT/wiki/Cone
+ * @param cn
+ * @param ray
+ * @param rec
+ * @param root
+ * @return t_bool
+ */
 t_bool	hit_cone_side(t_cone *cn, t_ray *ray, t_hit_record *rec, double root)
 {
 	double	hit_height;
@@ -90,6 +108,13 @@ t_bool	hit_cone_side(t_cone *cn, t_ray *ray, t_hit_record *rec, double root)
 	return (TRUE);
 }
 
+/**
+ * @brief 광선이 원뿔의 옆면에 닿는지, 원뿔의 밑면에 닿는지 판단한다.
+ * @param cn_obj
+ * @param ray
+ * @param rec
+ * @return t_bool
+ */
 t_bool	hit_cone(t_object *cn_obj, t_ray *ray, t_hit_record *rec)
 {
 	t_cone		*cn;
