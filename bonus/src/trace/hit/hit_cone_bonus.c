@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 00:05:40 by yena              #+#    #+#             */
-/*   Updated: 2023/07/19 20:11:01 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/19 20:26:09 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,27 +48,31 @@ void	calculate_cn_equation(t_cone *cn, t_ray *ray, t_equation *eq)
 
 /**
  * @brief 원뿔의 밑면에 닿는지 판단한다.
- * t = ((C − O) ⋅ N) / D ⋅ N
+ * @see https://bigpel66.oopy.io/library/42/inner-circle/5\n
+ * - 6)Cone Intersection with Cap
  * @param cn
  * @param ray
  * @param rec
  * @param eq
  * @return t_bool
  */
-t_bool	hit_cone_base(t_cone *cn, t_ray *ray, t_hit_record *rec, t_equation *eq)
+t_bool	hit_cone_base(t_cone *cn, t_ray *ray, t_hit_record *rec)
 {
-	t_vec3		oc;
-	double		hit_length;
+	t_vec3	oc;
+	double	ray_dir_dot_axis;
 
 	oc = vminus(cn->center, ray->origin);
-	eq->root = vdot(oc, cn->axis) / vdot(ray->direction, cn->axis);
-	hit_length = vlength(vminus(cn->center, ray_at(ray, eq->root)));
-	if (hit_length > cn->radius
-		|| eq->root < rec->tmin || eq->root > rec->tmax)
+	ray_dir_dot_axis = vdot(ray->direction, cn->axis);
+	if (fabs(ray_dir_dot_axis) < EPSILON)
 		return (FALSE);
-	rec->t = eq->root;
+	rec->t = vdot(oc, cn->axis) / ray_dir_dot_axis;
+	if (rec->t < rec->tmin || rec->t > rec->tmax)
+		return (FALSE);
 	rec->p = ray_at(ray, rec->t);
-	rec->normal = vunit(oc);
+	if (vdot(vminus(rec->p, cn->center), vminus(rec->p, cn->center))
+		> cn->radius_square)
+		return (FALSE);
+	rec->normal = vunit(vmult_(cn->axis, -1));
 	set_face_normal(ray, rec);
 	return (TRUE);
 }
@@ -122,7 +126,7 @@ t_bool	hit_cone(t_object *cn_obj, t_ray *ray, t_hit_record *rec)
 
 	rec->albedo = cn_obj->albedo;
 	cn = cn_obj->element;
-	if (hit_cone_base(cn, ray, rec, &eq))
+	if (hit_cone_base(cn, ray, rec))
 		return (TRUE);
 	calculate_cn_equation(cn, ray, &eq);
 	if (eq.discriminant < 0)
