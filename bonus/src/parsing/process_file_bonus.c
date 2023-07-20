@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 23:33:02 by yena              #+#    #+#             */
-/*   Updated: 2023/07/19 16:09:01 by yena             ###   ########.fr       */
+/*   Updated: 2023/07/20 16:11:34 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	put_info_from_line_arr(char **line_arr, t_scene *scene, int *acl)
 		put_ambient_info(line_arr, scene);
 	else if (ft_strncmp(line_arr[0], "C", 2) == 0)
 		put_camera_info(line_arr, scene);
-	else if (ft_strncmp(line_arr[0], "L", 2) == 0)
+	else if (ft_strncmp(line_arr[0], "l", 2) == 0)
 		put_light_info(line_arr, scene);
 	else if (ft_strncmp(line_arr[0], "sp", 3) == 0)
 		put_sphere_info(line_arr, scene);

@@ -48,7 +48,7 @@ MLX_LIB = libmlx.dylib
 LIBFT_DIR = libft
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror
 LFLAGS = -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 INC = -I ${LIBFT_DIR} -I ${MLX_DIR}
 

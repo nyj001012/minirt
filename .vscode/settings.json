@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "trace.h": "c",
+        "structures.h": "c",
+        "stdbool.h": "c",
+        "scene.h": "c",
+        "parsing.h": "c",
+        "mlx_utils.h": "c",
+        "structures_bonus.h": "c"
+    }
+}
